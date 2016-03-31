@@ -1,0 +1,19 @@
+INDEX VERSION 1.127+/Users/BARNES_1/git/CSC791_Project/Java/.metadata/.plugins/org.eclipse.jdt.core
+1511570354.index
+2556249244.index
+2376625133.index
+1831474627.index
+1040376109.index
+3357112224.index
+306326927.index
+3085072714.index
+1761014631.index
+1242869121.index
+2802271970.index
+3683318637.index
+419607439.index
+2783648097.index
+4291364629.index
+2556618475.index
+1271342938.index
+2171826273.index
