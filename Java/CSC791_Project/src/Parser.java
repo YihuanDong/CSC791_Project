@@ -39,7 +39,7 @@ public class Parser {
 			System.out.println("No headerMap.");
 			return;
 		}
-		File file = new File(filePath);
+		
 		String[] header = headerMap.keySet().toArray(new String[headerMap.keySet().size()]);
 		CSVPrinter printer = new CSVPrinter(new FileWriter(filePath), CSVFormat.EXCEL.withHeader(header));
 		
@@ -48,7 +48,9 @@ public class Parser {
 			for (String key1: recordsByProblem.keySet()) {
 				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
 				for (int i = 0; i < recordForCurrPrb.size(); i++) {
-					printer.printRecord(recordForCurrPrb.get(i).record);
+					Row row = recordForCurrPrb.get(i);
+					Object[] obj = row.list.toArray(new Object[row.list.size()]);
+					printer.printRecord(obj);
 				}
 			}
 		}
