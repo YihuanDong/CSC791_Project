@@ -26,21 +26,69 @@ public class Parser {
 		
 		saveRecordsToMap(parser);
 		
-		orderRecordsByInteraction();
-
-		
-		System.out.println("Record number: " + parser.getRecordNumber());
-		System.out.println("Parser.splitRecord() Finished!");
 		parser.close();
 	}
 	
-	public static void updateNumInteractionInProblem() {
+	public static void updateNumAttempts() {
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				double lastElTime = 0.0;
+				int numAttempts = 0;
+				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
+				for (int i = 0; i < recordForCurrPrb.size(); i++) {
+					Row row = recordForCurrPrb.get(i);
+					double currElTime = Double.parseDouble(row.list.get(headerMap.get("elTime")));
+					
+					if (currElTime < lastElTime) numAttempts++;
+					
+					row.list.set(headerMap.get("numAttempts"), Integer.toString(numAttempts));
+					lastElTime = currElTime;
+				}
+			}
+		}
+	}
+	
+	public static void updateNumInteraction() {
 		for (String key: recordsByStudent.keySet()) {
 			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
 			for (String key1:recordsByProblem.keySet()) {
 				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
-				
+				double lastElTime = 0.0;
+				int numInteractionCurr = 0;
 				//count number of interactions and update for each row
+				for (int i = 0; i < recordForCurrPrb.size(); i++) {
+					Row row = recordForCurrPrb.get(i);
+					
+					// numInteractionCurr depends on if problem restart
+					double currElTime =  Double.parseDouble(row.list.get(headerMap.get("elTime")));
+					if (currElTime < lastElTime) {
+						numInteractionCurr = 0;
+					}
+					numInteractionCurr++;
+					row.list.set(headerMap.get("numInteractionCurr"), Integer.toString(numInteractionCurr));
+					lastElTime = currElTime;
+					
+					// numInteractionTotal = i+1
+					row.list.set(headerMap.get("numInteractionTotal"), Integer.toString(i+1));
+				}
+			}
+		}
+	}
+	
+	public static void updateNumProblemsCompleted() {
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			int numProblemsCompleted = 0;
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
+				for (int i = 0; i < recordForCurrPrb.size(); i++) {
+					Row row = recordForCurrPrb.get(i);
+					if (row.list.get(headerMap.get("action")).equals("98")) {
+						numProblemsCompleted++;
+					}
+					row.list.set(headerMap.get("numProblemsCompleted"), Integer.toString(numProblemsCompleted));
+				}
 			}
 		}
 	}
@@ -60,7 +108,7 @@ public class Parser {
 				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
 				for (int i = 0; i < recordForCurrPrb.size(); i++) {
 					Row row = recordForCurrPrb.get(i);
-					Object[] obj = row.list.toArray(new Object[row.list.size()]);
+					Object[] obj = row.list.toArray();
 					printer.printRecord(obj);
 				}
 			}
@@ -77,8 +125,12 @@ public class Parser {
 			}
 		}
 	}
+	
 	private static void saveRecordsToMap(CSVParser parser) {
 		for (CSVRecord record: parser) {
+			// if the rule doesn't meet these requirements, discard the row
+			if (isUnwantedRow(record)) continue;
+			
 			String studentID = record.get(headerMap.get("studentID"));
 			
 			// if studentID does not exist in recordsByStudent, create a record for the studentID 
@@ -106,8 +158,12 @@ public class Parser {
 			
 		}
 		
+		
+	}
+	
+	public static void checkRecordNumber() {
 		// Check record number
-		/*int checkRecordNumber = 0;
+		int checkRecordNumber = 0;
 		for (String key: recordsByStudent.keySet()) {
 			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
 			for (String key1: recordsByProblem.keySet()) {
@@ -115,19 +171,39 @@ public class Parser {
 				checkRecordNumber += recordForCurrProb.size();
 			}
 		}
-		System.out.println("checkRecordNumber: " + checkRecordNumber);*/
+		System.out.println("checkRecordNumber: " + checkRecordNumber);
 	}
+	
+	private static boolean isUnwantedRow(CSVRecord record) {
+		if (record.get(headerMap.get("rule")).equals("login")) return true;
+		if (record.get(headerMap.get("rule")).equals("#NAME?")) return true;
+		if (record.get(headerMap.get("rule")).equals("next")) return true;
+		return false;
+	}
+
 	public static void main(String[] args) {
 		try {
+			System.out.println("Spliting Record...");
 			Parser.splitRecord("../../data/DT6_Cond5_ActionTable.csv");
+			System.out.println();
 			
+			System.out.println("Updating number of Interaction...");
+			Parser.updateNumInteraction();
+			System.out.println();
 			
+			System.out.println("Updating number of problems completed...");
+			Parser.updateNumProblemsCompleted();
+			System.out.println();
 			
+			System.out.println("Updating number of attempts to current problem...");
+			Parser.updateNumAttempts();
+			System.out.println();
+			
+			System.out.println("Outputing records into one file...");
 			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");
+			System.out.println();
 			
-			
-			
-			
+			System.out.println("Completed!");
 //			DataRow d = new DataRow();
 //			DataRow a = new DataRow();
 //			d.interaction = 5;

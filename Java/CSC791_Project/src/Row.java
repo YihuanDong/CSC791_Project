@@ -17,8 +17,10 @@ public class Row implements Comparable<Row>{
 	}
 	@Override
 	public int compareTo(Row o) {
-		// TODO Auto-generated method stub
-		return Integer.parseInt(this.record.get(1))-Integer.parseInt(o.record.get(1));
+		double result = Double.parseDouble(this.record.get(23))-Double.parseDouble(o.record.get(23));
+		if (result > 0) return 1;
+		else if (result < 0) return -1;
+		else return 0;
 	}
 
 }
