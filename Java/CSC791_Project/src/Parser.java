@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,6 +33,28 @@ public class Parser {
 		System.out.println("Parser.splitRecord() Finished!");
 		parser.close();
 	}
+	
+	public static void outputInOneFile(String filePath) throws IOException{
+		if (headerMap == null) {
+			System.out.println("No headerMap.");
+			return;
+		}
+		File file = new File(filePath);
+		String[] header = headerMap.keySet().toArray(new String[headerMap.keySet().size()]);
+		CSVPrinter printer = new CSVPrinter(new FileWriter(filePath), CSVFormat.EXCEL.withHeader(header));
+		
+		for (String key: recordsByStudent.keySet()) {
+			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
+				for (int i = 0; i < recordForCurrPrb.size(); i++) {
+					printer.printRecord(recordForCurrPrb.get(i).record);
+				}
+			}
+		}
+		printer.close();
+	}
+	
 	private static void orderRecordsByInteraction() {
 		for (String key: recordsByStudent.keySet()) {
 			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
@@ -84,6 +107,7 @@ public class Parser {
 	public static void main(String[] args) {
 		try {
 			Parser.splitRecord("../../data/DT6_Cond5_ActionTable.csv");
+			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");
 			DataRow d = new DataRow();
 			DataRow a = new DataRow();
 			d.interaction = 5;
