@@ -1,9 +1,13 @@
+import java.util.Map;
+
 import org.apache.commons.csv.*;
 
 public class Row implements Comparable<Row>{
 	public CSVRecord record;
+	
 	public Row(CSVRecord record) {
 		this.record = record;
+		
 	}
 	@Override
 	public int compareTo(Row o) {
