@@ -34,6 +34,17 @@ public class Parser {
 		parser.close();
 	}
 	
+	public static void updateNumInteractionInProblem() {
+		for (String key: recordsByStudent.keySet()) {
+			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1:recordsByProblem.keySet()) {
+				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
+				
+				//count number of interactions and update for each row
+			}
+		}
+	}
+	
 	public static void outputInOneFile(String filePath) throws IOException{
 		if (headerMap == null) {
 			System.out.println("No headerMap.");
@@ -109,21 +120,28 @@ public class Parser {
 	public static void main(String[] args) {
 		try {
 			Parser.splitRecord("../../data/DT6_Cond5_ActionTable.csv");
-			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");
-			DataRow d = new DataRow();
-			DataRow a = new DataRow();
-			d.interaction = 5;
-			a.interaction = 1;
-			List<DataRow> list = new LinkedList<DataRow>();
-			list.add(d);
-			list.add(a);
-			Collections.sort(list);
 			
-			for(int i = 0; i < list.size(); i++){
-				System.out.println(list.get(i).interaction);
-			}
-				
-			System.out.println((1==2)?false:true);
+			
+			
+			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");
+			
+			
+			
+			
+//			DataRow d = new DataRow();
+//			DataRow a = new DataRow();
+//			d.interaction = 5;
+//			a.interaction = 1;
+//			List<DataRow> list = new LinkedList<DataRow>();
+//			list.add(d);
+//			list.add(a);
+//			Collections.sort(list);
+//			
+//			for(int i = 0; i < list.size(); i++){
+//				System.out.println(list.get(i).interaction);
+//			}
+//				
+//			System.out.println((1==2)?false:true);
 		}catch(IOException ex){
 			System.out.print(ex);
 		}
