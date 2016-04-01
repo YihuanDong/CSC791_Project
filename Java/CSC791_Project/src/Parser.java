@@ -175,6 +175,53 @@ public class Parser {
 		}
 	}
 	
+	public static void updateHintFollow(String file) throws IOException{
+		CSVParser parser = new CSVParser(new FileReader(file), CSVFormat.DEFAULT.withHeader());
+		Map<String, Integer> header = parser.getHeaderMap();
+		
+		List<Row> statsRecords = new LinkedList<Row>();
+		for (CSVRecord record: parser) {
+			statsRecords.add(new Row(record));
+		}
+		
+		int numHints = 0;
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					
+					String studentID = row.list.get(headerMap.get("studentID"));
+					String currPrb = row.list.get(headerMap.get("currPrb"));
+					String elTime = row.list.get(headerMap.get("elTime"));
+					int hintFollow = -1;
+					
+					for (int j = 0; j < statsRecords.size(); j++) {
+						Row hintRow = statsRecords.get(j);
+						
+						if (studentID.equals(hintRow.list.get(header.get("studentID")))
+								&& currPrb.equals(hintRow.list.get(header.get("currPrb")))
+								&& elTime.equals(hintRow.list.get(header.get("elTime")))) {
+							if (Boolean.parseBoolean(hintRow.list.get(header.get("lvl1HintFollowed"))))
+								hintFollow = 1;
+							else
+								hintFollow = 0;
+							
+							numHints++;
+							break;
+						}
+					}
+					
+					row.list.set(headerMap.get("hintFollow"), Integer.toString(hintFollow));
+				}
+			}
+		}
+		System.out.println("Number of Hints: " + numHints);
+	}
+	
 	public static void outputInOneFile(String filePath) throws IOException{
 		if (headerMap == null) {
 			System.out.println("No headerMap.");
@@ -221,15 +268,15 @@ public class Parser {
 		printer.close();
 	}
 	
-	private static void orderRecordsByInteraction() {
-		for (String key: recordsByStudent.keySet()) {
-			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
-			for (String key1: recordsByProblem.keySet()) {
-				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
-				Collections.sort(recordForCurrPrb);
-			}
-		}
-	}
+//	private static void orderRecordsByInteraction() {
+//		for (String key: recordsByStudent.keySet()) {
+//			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
+//			for (String key1: recordsByProblem.keySet()) {
+//				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
+//				Collections.sort(recordForCurrPrb);
+//			}
+//		}
+//	}
 	
 	private static void saveRecordsToMap(CSVParser parser) {
 		for (CSVRecord record: parser) {
@@ -317,6 +364,9 @@ public class Parser {
 			Parser.updateIsForced();
 			System.out.println();
 			
+			System.out.println("Updating hintFollow...");
+			Parser.updateHintFollow("../../data/DT6_Cond5_Stat.csv");
+			System.out.println();
 			
 			System.out.println("Outputing records into one file...");
 			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");

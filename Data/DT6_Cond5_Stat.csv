@@ -1,0 +1,227 @@
+,elTime,lvl1Hint,studentID,currPrb,state,levelsPresented,lvl1HintFollowed,stateChangedB4FollowHint,lvl1_timeCost,diffRulesApplied,diffNodesHighlighted,nodesDerived,numRestart,numDiffNodeInResult
+1,387.979,Try to derive A working forward.,afalfais,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",3,TRUE,1,36.977,1,2,1,0,1
+2,20.456,Try to derive -L working forward.,afalfais,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",4,TRUE,1,48.286,2,3,1,0,1
+3,73.534,Try to derive S+L working forward.,afalfais,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",3,FALSE,NA,NA,NA,NA,NA,NA,NA
+4,4.116,Try to derive -L working forward.,afalfais,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",4,TRUE,1,6.792,1,2,1,0,1
+5,3.89,Try to derive -L working forward.,afalfais,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",3,TRUE,1,8.005,1,2,1,0,1
+6,14.17,Try to derive -L working forward.,afalfais,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",3,TRUE,1,52.938,3,3,2,0,1
+7,33.747,Try to derive S working forward.,afalfais,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens],(S+L)[5;1;Simplification]/S",3,TRUE,1,14.053,1,2,1,0,1
+8,17.868,Try to derive -L working forward.,afalfais,1.0.4.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+9,20.988,Try to derive A>-B working forward.,afalfais,5.1.1.0,undefined,3,TRUE,1,40.937,1,2,2,0,1
+10,129.282,Try to derive -D>-A working forward.,afalfais,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;1,2;Disjunctive Syllogism],(-D>B)[5;3;Implication],(--B>-A)[6;4;Contrapositive],(B>-A)[7;6;Double Negation]/(-D>-A)",3,TRUE,1,13.492,1,2,1,0,1
+11,6.259,Try to derive -S>B working forward.,afalfais,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",3,TRUE,1,12.064,1,1,1,0,1
+12,83.004,Try to derive -D>-S working forward.,afalfais,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given],(-S>B)[4;1;Implication],(-B>--S)[5;4;Contrapositive],(-B>S)[6;5;Double Negation],(-D>-B)[7;2;Contrapositive]/(D+G)",4,FALSE,NA,NA,NA,NA,NA,NA,NA
+13,482.456,Try to derive S+L working forward.,cchillen,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",3,TRUE,1,121.614,4,0,1,0,1
+14,32.968,Try to derive A>-B working forward.,cchillen,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,1,6.086,1,2,1,0,1
+15,14.99,Try to derive -F working forward.,cchillen,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given]/-(Y+F)",1,TRUE,0,0,1,0,0,0,0
+16,334.174,Try to derive (Y>P)*(P>Y) working forward.,cchillen,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",1,TRUE,1,98.41,2,2,1,0,1
+17,46.02,Try to derive -D working forward.,smcalli,1.0.1.0,undefined,4,FALSE,NA,NA,NA,NA,NA,NA,NA
+18,12.129,Try to derive -D working forward.,smcalli,1.0.3.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given]/B",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+19,953.738,Try to derive B working forward.,asgargan,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification],A[5;4,2;Disjunctive Syllogism],(B*C)[6;1,5;Modus Ponens]/B",1,TRUE,1,5.952,1,1,1,0,1
+20,295.014,Try to derive S+L working forward.,asgargan,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;3,2;Modus Ponens]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+21,40.886,Try to derive -Z working forward.,asgargan,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,41.097,2,1,1,0,1
+22,204.48,Try to derive -J working forward.,asgargan,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification]/((J+L)+K)",1,TRUE,1,59.885,1,2,1,0,1
+23,16.25,Try to derive R>Z working forward.,asgargan,5.-1.1.0,"(-R+Z)[1;0;Given],(G>-Z)[2;0;Given]/(R>-G)",1,TRUE,1,7.127,1,1,1,0,1
+24,11.433,Try to derive -F working forward.,asgargan,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given]/-(Y+F)",1,TRUE,0,0,1,0,0,0,0
+25,13.134,Try to derive -S>B working forward.,asgargan,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,6.015,1,1,1,0,1
+26,42.426,Try to derive -D>-S working forward.,asgargan,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given],(-S>B)[4;1;Implication],(-B>--S)[5;4;Contrapositive],(-B>S)[6;5;Double Negation],(-D>-B)[7;2;Contrapositive]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+27,116.553,Try to derive A working forward.,wgtolone,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",1,TRUE,0,0,1,0,1,0,0
+28,19.518,Try to derive -I working forward.,wgtolone,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,1,4.62,1,1,1,0,1
+29,20.42,Try to derive Z working forward.,wgtolone,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given]/(X+S)",1,TRUE,3,50.832,2,4,3,0,3
+30,130.857,Try to derive -X>--Y working forward.,wgtolone,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],-W[5;2;Simplification],(T>S)[6;3,5;Disjunctive Syllogism],Z[7;2;Simplification],(-Y>X)[8;7,1;Modus Ponens],(Y>T)[9;4;Implication],(Y>S)[10;9,6;Hypothetical Syllogism]/(X+S)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+31,93.583,Try to derive --Y+X working forward.,wgtolone,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification],(-Y>X)[6;5,1;Modus Ponens]/(X+S)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+32,11.913,Try to derive A>-B working forward.,wgtolone,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,0,0,1,0,1,0,0
+33,6.684,Try to derive (Y>P)*(P>Y) working forward.,wgtolone,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",1,TRUE,1,107.55,2,4,1,0,1
+34,344.981,Try to derive -D working forward.,hqbui,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given]/B",4,TRUE,1,140.277,1,2,1,0,1
+35,30.442,Try to derive S+L working forward.,hqbui,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",3,TRUE,1,25.777,1,1,1,0,1
+36,46.302,Try to derive -Z working forward.,hqbui,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,32.643,1,1,1,0,1
+37,253.136,Try to derive K working forward.,hqbui,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification],-J[5;4,3;Modus Tollens]/((J+L)+K)",1,TRUE,1,10.29,1,2,1,0,1
+38,11.184,Try to derive A>-B working forward.,hqbui,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,0,0,1,0,1,0,0
+39,18.893,Try to derive -S>B working forward.,hqbui,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,4,13.085,3,4,5,0,0
+40,29.419,Try to derive G+Z working forward.,jdmalatr,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",4,TRUE,1,553.233,1,1,1,0,1
+41,34.02,Try to derive -I working forward.,jdmalatr,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,5,45.796,1,1,3,0,1
+42,33.093,Try to derive -Z working forward.,jdmalatr,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,5,372.32,7,3,4,0,1
+43,433.858,Try to derive K working forward.,jdmalatr,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification],-J[5;4,3;Modus Tollens]/((J+L)+K)",3,TRUE,1,13.777,1,2,1,0,1
+44,28.341,Try to derive Z working forward.,jdmalatr,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given]/(X+S)",1,TRUE,1,3.291,1,1,1,0,1
+45,111.266,Try to derive (-Y>X)*(T>S) working forward.,jdmalatr,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification],-W[6;2;Simplification],(-Y>X)[7;1,5;Modus Ponens],(T>S)[8;6,3;Disjunctive Syllogism]/(X+S)",4,TRUE,1,43.984,1,2,1,0,1
+46,2.984,Try to derive D>F working forward.,jdmalatr,4.-1.2.0,"((C>D)+B)[1;0;Given],(B>G)[2;0;Given],((D>F)*-G)[3;0;Given]/(C>F)",4,TRUE,1,26.537,1,1,1,0,1
+47,9.659,Try to derive R>Z working forward.,jdmalatr,5.-1.1.0,"(-R+Z)[1;0;Given],(G>-Z)[2;0;Given]/(R>-G)",4,TRUE,1,30.32,1,1,1,0,1
+48,3.056,Try to derive -S>B working forward.,jdmalatr,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,10.446,1,1,1,0,1
+49,110.432,Try to derive -D>-S working forward.,jdmalatr,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given],(-S>B)[4;1;Implication],(-B>--S)[5;4;Contrapositive],(-B>S)[6;5;Double Negation],(-D>-B)[7;2;Contrapositive]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+50,13.359,Try to derive (Y>P)*(P>Y) working forward.,jdmalatr,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",1,TRUE,0,0,1,0,1,0,0
+51,139.253,Try to derive S+L working forward.,nlrobson,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;3,2;Modus Ponens]/S",1,TRUE,1,20.868,1,0,1,0,1
+52,52.971,Try to derive G+Z working forward.,nlrobson,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+53,2.775,Try to derive G+Z working forward.,nlrobson,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,4,135.012,3,3,3,1,1
+54,48.003,Try to derive -D>B working forward.,nlrobson,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;2,1;Disjunctive Syllogism]/(-D>-A)",1,TRUE,1,8.677,1,1,1,0,1
+55,26.664,Try to derive -S>B working forward.,nlrobson,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,3.956,1,1,1,0,1
+56,312.928,Try to derive A working forward.,jkayani,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",1,TRUE,1,116.089,2,2,1,0,1
+57,51.893,Try to derive S+L working forward.,jkayani,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",1,TRUE,1,7.516,1,1,1,0,1
+58,42.729,Try to derive -Q working forward.,jkayani,2.1.1.0,"((-T*S)>-R)[1;0;Given],-T[2;0;Given],((-Q+P)>S)[3;0;Given],(Q>T)[4;0;Given]/(-R+N)",1,TRUE,1,199.998,3,4,1,0,1
+59,25.613,Try to derive -Q working forward.,jkayani,2.1.1.0,"((-T*S)>-R)[1;0;Given],-T[2;0;Given],((-Q+P)>S)[3;0;Given],(Q>T)[4;0;Given]/(-R+N)",1,TRUE,1,2.14,1,2,1,0,1
+60,12.991,Try to derive A>-B working forward.,jkayani,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,1,16.528,3,2,1,0,1
+61,16.045,Try to derive -S>B working forward.,jkayani,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+62,15.392,Try to derive -S>B working forward.,jkayani,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,7.318,1,1,1,0,1
+63,38.269,Try to derive -L working forward.,cjenriqu,1.0.2.0,undefined,1,TRUE,1,82.883,2,2,2,0,1
+64,62.856,Try to derive -I working forward.,cjenriqu,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,1,81.286,2,2,1,0,1
+65,17.862,Try to derive -S working forward.,cjenriqu,3.1.2.0,"(K>R)[1;0;Given],(-S*(-R+P))[2;0;Given],(O>S)[3;0;Given],((-S+T)>-P)[4;0;Given]/(-K*-O)",1,TRUE,1,62473.538,3,2,1,0,1
+66,14977.6,Try to derive -S+T working forward.,cjenriqu,3.1.2.0,"(K>R)[1;0;Given],(-S*(-R+P))[2;0;Given],(O>S)[3;0;Given],((-S+T)>-P)[4;0;Given],-S[5;2;Simplification],(-R+P)[6;2;Simplification],-O[7;5,3;Modus Tollens]/(-K*-O)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+67,22.406,Try to derive -S>B working forward.,cjenriqu,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,1.883,1,1,1,0,1
+68,5366.92,Try to derive S+L working forward.,cbwagner,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+69,62.164,Try to derive S+L working forward.,cbwagner,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+70,11.565,Try to derive -L working forward.,cbwagner,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,TRUE,1,2.11,1,1,1,0,1
+71,82.205,Try to derive Q>P working forward.,cbwagner,2.-1.3.1,"(Q>K)[1;0;Given],(R*O)[2;0;Given],(K>P)[3;0;Given],Q[4;0;Given]/(P*R)",1,TRUE,1,9.274,1,2,1,0,1
+72,13.459,Try to derive R>Z working forward.,cbwagner,5.-1.1.0,"(-R+Z)[1;0;Given],(G>-Z)[2;0;Given]/(R>-G)",1,TRUE,3,64.508,4,3,3,0,1
+73,504.117,Try to derive B working forward.,scfausz,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],(--U+-L)[4;2;Implication]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+74,514.236,Try to derive (J+L)+K working forward.,scfausz,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification],-J[5;4,3;Modus Tollens],K[6;1,5;Disjunctive Syllogism]/((J+L)+K)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+75,118.223,Try to derive -D>B working forward.,scfausz,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;1,2;Disjunctive Syllogism]/(-D>-A)",1,TRUE,1,4.375,1,1,1,0,1
+76,15.342,Try to derive -S>B working forward.,scfausz,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,2.895,1,1,1,0,1
+77,30.686,Try to derive -L working forward.,mcheiden,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,TRUE,3,7.912,3,2,2,0,1
+78,16.715,Try to derive G+Z working forward.,mcheiden,1.0.3.0,undefined,1,FALSE,NA,NA,NA,NA,NA,NA,NA
+79,12.301,Try to derive G+Z working forward.,mcheiden,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+80,21.21,Try to derive G+Z working forward.,mcheiden,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+81,25.088,Try to derive G+Z working forward.,mcheiden,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,5,575.714,6,4,4,0,3
+82,18.579,Try to derive -I working forward.,mcheiden,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,1,136.778,3,2,1,0,1
+83,23.642,Try to derive Z working forward.,mcheiden,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given]/(X+S)",1,TRUE,1,4.239,1,1,1,0,1
+84,23.954,Try to derive -Y working forward.,mcheiden,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given],-F[3;2;Double Negation]/-(Y+F)",1,TRUE,1,77.888,3,2,2,0,1
+85,268.875,Try to derive A working forward.,jepatzer,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",1,TRUE,0,0,1,0,1,0,0
+86,12.115,Try to derive -Z working forward.,jepatzer,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,51.103,2,2,1,0,1
+87,33.251,Try to derive J+-N working forward.,jepatzer,6.1.2.0,"(B=-J)[1;0;Given],(-N+J)[2;0;Given],(B+-N)[3;0;Given]/(B>-N)",1,TRUE,1,5.573,1,1,1,0,1
+88,337.62,Try to derive --J+-N working forward.,jepatzer,6.1.2.0,"(B=-J)[1;0;Given],(-N+J)[2;0;Given],(B+-N)[3;0;Given],(J+-N)[4;2;Commutative]/(B>-N)",1,TRUE,1,22.191,1,1,1,0,1
+89,7.781,Try to derive G+Z working forward.,kgohel2,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",3,TRUE,3,24.892,2,2,2,1,1
+90,368.608,Try to derive -R working forward.,kgohel2,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(G+Z)[4;3;Addition],-W[5;2,4;Modus Ponens],(W+-R)[6;1;Simplification]/-R",3,TRUE,1,37.522,3,2,1,0,1
+91,4.429,Try to derive Q>P working forward.,kgohel2,2.-1.3.1,"(Q>K)[1;0;Given],(R*O)[2;0;Given],(K>P)[3;0;Given],Q[4;0;Given]/(P*R)",4,TRUE,1,17.984,1,2,1,0,1
+92,46.933,Try to derive -J working forward.,kgohel2,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification]/((J+L)+K)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+93,2.667,Try to derive I>D working forward.,kgohel2,3.-1.3.1,"((S>D)+I)[1;0;Given],((-S+Q)>Y)[2;0;Given],-D[3;0;Given],(-D>-I)[4;0;Given]/Y",2,TRUE,1,13.42,1,1,1,0,1
+94,54.679,Try to derive -W working forward.,kgohel2,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification]/(X+S)",1,TRUE,1,8.881,1,1,1,0,1
+95,181.733,Try to derive T>S working forward.,kgohel2,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification],-W[6;2;Simplification],(-Y>X)[7;1,5;Modus Ponens]/(X+S)",3,TRUE,5,416.295,3,3,4,0,2
+96,4.464,Try to derive D>F working forward.,kgohel2,4.-1.2.0,"((C>D)+B)[1;0;Given],(B>G)[2;0;Given],((D>F)*-G)[3;0;Given]/(C>F)",4,TRUE,1,17.568,1,1,1,0,1
+97,66.389,Try to derive C>F working forward.,kgohel2,4.-1.2.0,"((C>D)+B)[1;0;Given],(B>G)[2;0;Given],((D>F)*-G)[3;0;Given],(D>F)[4;3;Simplification],-G[5;3;Simplification],-B[6;2,5;Modus Tollens],(C>D)[7;1,6;Disjunctive Syllogism]/(C>F)",4,TRUE,1,8.76,1,2,1,0,1
+98,82.385,Try to derive --Z>-G working forward.,kgohel2,5.-1.1.0,"(-R+Z)[1;0;Given],(G>-Z)[2;0;Given],(R>Z)[3;1;Implication]/(R>-G)",4,TRUE,1,17.415,2,1,1,0,1
+99,26.965,Try to derive -F working forward.,kgohel2,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given]/-(Y+F)",1,TRUE,0,0,0,1,0,0,0
+100,31.129,Try to derive -S>B working forward.,kgohel2,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,TRUE,1,1.406,1,1,1,0,1
+101,188.402,Try to derive -D>-S working forward.,kgohel2,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given],(-S>B)[4;1;Implication],(-B>--S)[5;4;Contrapositive],(-B>S)[6;5;Double Negation],(-D>-B)[7;2;Contrapositive]/(D+G)",4,FALSE,NA,NA,NA,NA,NA,NA,NA
+102,62.323,Try to derive S+L working forward.,dauchman,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;3,2;Modus Ponens]/S",2,FALSE,NA,NA,NA,NA,NA,NA,NA
+103,477.362,Try to derive S+L working forward.,dauchman,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+104,133.298,Try to derive S+L working forward.,dauchman,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",4,TRUE,1,32.154,1,1,1,0,1
+105,4.271,Try to derive -F working forward.,dauchman,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given]/-(Y+F)",3,TRUE,0,0,0,0,0,0,0
+106,3.812,Try to derive -S>B working forward.,dauchman,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",3,TRUE,1,6.55,1,1,1,0,1
+107,59.688,Try to derive -D>-S working forward.,dauchman,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given],(-S>B)[4;1;Implication],(-B>--S)[5;4;Contrapositive],(-B>S)[6;5;Double Negation],(-D>-B)[7;2;Contrapositive]/(D+G)",3,FALSE,NA,NA,NA,NA,NA,NA,NA
+108,3.49,Try to derive (Y>P)*(P>Y) working forward.,dauchman,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",1,TRUE,1,4.62,1,1,1,0,1
+109,8.555,Try to derive (C>-J)*(-J>C) working forward.,dauchman,6.-1.3.1,"(C=-J)[1;0;Given],(C+-N)[2;0;Given],(N>C)[3;0;Given]/(N>-J)",3,TRUE,1,5.766,1,1,1,0,1
+110,1693.98,Try to derive -L working forward.,rbwest,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,TRUE,1,30.51,1,4,1,0,1
+111,14.104,Try to derive G+Z working forward.,rbwest,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,1,44.238,2,3,1,0,1
+112,28.482,Try to derive -Z working forward.,rbwest,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,29.058,1,2,1,0,1
+113,34.677,Try to derive A>-B working forward.,rbwest,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,1,3.49,1,2,1,0,1
+114,40.998,Try to derive -Y*-F working forward.,rbwest,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given],-F[3;2;Double Negation],-Y[4;1,3;Modus Tollens]/-(Y+F)",1,TRUE,1,8.922,1,1,1,0,1
+115,19.645,Try to derive H working forward.,rbwest,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,0,0,1,0,1,0,0
+116,292.374,Try to derive -L working forward.,jwschaff,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,TRUE,1,14.743,1,2,1,0,1
+117,17.722,Try to derive R>Z working forward.,jwschaff,5.-1.1.0,"(-R+Z)[1;0;Given],(G>-Z)[2;0;Given]/(R>-G)",1,TRUE,1,84.33,2,1,1,0,1
+118,11.172,Try to derive H working forward.,jwschaff,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,1,2.343,1,2,1,0,1
+119,10.641,Try to derive H working forward.,jwschaff,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,1,16.416,1,2,1,0,1
+120,12.832,Try to derive H working forward.,jwschaff,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,1,465.441,0,1,0,1,6
+121,17.722,Try to derive -L working forward.,tmsmiley,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,TRUE,1,84.383,2,2,1,0,1
+122,42.521,Try to derive G+Z working forward.,tmsmiley,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+123,71.676,Try to derive W+-R working forward.,tmsmiley,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(G+Z)[4;3;Addition],-W[5;2,4;Modus Ponens]/-R",1,TRUE,1,5.168,1,0,1,0,1
+124,26.97,Try to derive -Q working forward.,tmsmiley,2.1.1.0,"((-T*S)>-R)[1;0;Given],-T[2;0;Given],((-Q+P)>S)[3;0;Given],(Q>T)[4;0;Given]/(-R+N)",1,TRUE,4,75.719,4,5,4,0,2
+125,30.966,Try to derive -Z working forward.,tmsmiley,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,2,9.002,2,2,2,0,2
+126,26.321,Try to derive -Y working forward.,tmsmiley,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given],(-F>-Y)[3;1;Contrapositive],-F[4;2;Double Negation]/-(Y+F)",1,TRUE,0,0,1,0,1,0,0
+127,15.311,Try to derive -S>B working forward.,tmsmiley,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+128,16.106,Try to derive G+Z working forward.,lhmenden,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",4,TRUE,2,765.632,6,4,2,0,2
+129,15.165,Try to derive -I working forward.,lhmenden,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,1,6.589,1,1,1,0,1
+130,24.678,Try to derive Z working forward.,lhmenden,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given]/(X+S)",1,TRUE,1,9.987,1,1,1,0,1
+131,112.887,Try to derive (-Y>X)*(T>S) working forward.,lhmenden,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification],-W[6;2;Simplification],(-Y>X)[7;1,5;Modus Ponens],(T>S)[8;6,3;Disjunctive Syllogism]/(X+S)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+132,32.268,Try to derive -S>B working forward.,lhmenden,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+133,315.328,Try to derive S+L working forward.,sjletica,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",1,TRUE,1,14.978,1,1,1,0,1
+134,97.723,Try to derive G+Z working forward.,sjletica,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,2,161.006,3,3,2,0,2
+135,37.747,Try to derive -Z working forward.,sjletica,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,7.023,1,1,1,0,1
+136,67.851,Try to derive -S>B working forward.,sjletica,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+137,14.2,Try to derive -D working forward.,jeclark5,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given]/B",1,TRUE,1,13.8,1,0,1,0,1
+138,11.443,Try to derive -L working forward.,jeclark5,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",1,TRUE,1,14.186,2,2,1,0,1
+139,16.775,Try to derive -F working forward.,jeclark5,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given]/-(Y+F)",4,TRUE,0,0,0,1,0,0,0
+140,20.098,Try to derive H working forward.,jeclark5,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,3,61.179,3,3,3,0,1
+141,135.047,Try to derive --H+--F working forward.,jeclark5,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given],H[4;3,1;Modus Ponens],(H+F)[5;4;Addition],(--H+F)[6;5;Double Negation]/W",1,TRUE,1,16.409,1,1,1,0,1
+142,147.004,Try to derive A working forward.,tjdeaton,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",3,TRUE,1,21.78,2,2,1,0,1
+143,32.951,Try to derive -I working forward.,tjdeaton,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",2,TRUE,1,58.752,2,2,1,0,1
+144,30.313,Try to derive -D>B working forward.,tjdeaton,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;1,2;Disjunctive Syllogism]/(-D>-A)",3,TRUE,2,67.226,3,2,3,0,0
+145,139.237,Try to derive -D>-A working forward.,tjdeaton,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;1,2;Disjunctive Syllogism],(-D>B)[5;3;Implication],(--B>-A)[6;4;Contrapositive],(B>-A)[7;6;Double Negation]/(-D>-A)",1,TRUE,1,8.058,1,2,1,0,1
+146,2.642,Try to derive H working forward.,tjdeaton,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",2,TRUE,1,16.486,1,2,1,0,1
+147,52.207,Try to derive -(-H*-F) working forward.,tjdeaton,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given],H[4;1,3;Modus Ponens],(H+F)[5;4;Addition],(--H+F)[6;5;Double Negation],(--H+--F)[7;6;Double Negation]/W",3,FALSE,NA,NA,NA,NA,NA,NA,NA
+148,20.588,Try to derive G+Z working forward.,kjenkin3,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",4,TRUE,1,231.599,2,2,1,0,1
+149,13.918,Try to derive -Z working forward.,kjenkin3,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,7.6,1,1,1,0,1
+150,24.074,Try to derive I>D working forward.,kjenkin3,3.-1.3.1,"((S>D)+I)[1;0;Given],((-S+Q)>Y)[2;0;Given],-D[3;0;Given],(-D>-I)[4;0;Given]/Y",1,TRUE,1,21.08,1,1,1,0,1
+151,84.891,Try to derive -S+Q working forward.,kjenkin3,3.-1.3.1,"((S>D)+I)[1;0;Given],((-S+Q)>Y)[2;0;Given],-D[3;0;Given],(-D>-I)[4;0;Given],(I>D)[5;4;Contrapositive],-I[6;5,3;Modus Tollens],(S>D)[7;6,1;Disjunctive Syllogism],-S[8;3,7;Modus Tollens]/Y",1,TRUE,1,20.513,1,0,1,0,1
+152,32.573,Try to derive -Y working forward.,kjenkin3,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given],-F[3;2;Double Negation],(-Y+F)[4;1;Implication]/-(Y+F)",1,TRUE,0,0,1,0,1,0,0
+153,2.101,Try to derive J+-N working forward.,kjenkin3,6.1.2.0,"(B=-J)[1;0;Given],(-N+J)[2;0;Given],(B+-N)[3;0;Given]/(B>-N)",1,TRUE,1,28.607,2,1,1,0,1
+154,284.313,Try to derive A working forward.,jrconrad,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",3,TRUE,1,62.354,2,3,1,0,1
+155,26.473,Try to derive G+Z working forward.,jrconrad,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",3,TRUE,3,481.156,4,4,3,0,3
+156,83.533,Try to derive K working forward.,jrconrad,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification],-J[5;4,3;Modus Tollens]/((J+L)+K)",1,TRUE,1,1.875,1,1,1,0,1
+157,133.521,Try to derive K working forward.,jrconrad,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification],-J[5;3,4;Modus Tollens]/((J+L)+K)",3,TRUE,0,0,1,0,1,0,0
+158,94.876,Try to derive (J+L)+K working forward.,jrconrad,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification],-J[5;3,4;Modus Tollens],K[6;1,5;Disjunctive Syllogism]/((J+L)+K)",4,TRUE,1,26.493,1,0,1,0,1
+159,30.162,Try to derive A>-B working forward.,jrconrad,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,1,24.459,1,2,1,0,1
+160,233.428,Try to derive B>-A working forward.,jrconrad,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;1,2;Disjunctive Syllogism],(-A+-B)[5;4;Implication],(-B+-A)[6;5;Commutative],(--B>-A)[7;4;Contrapositive]/(-D>-A)",1,TRUE,0,0,0,0,0,0,0
+161,67,Try to derive H working forward.,jrconrad,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,1,18.232,1,2,1,0,1
+162,373.719,Try to derive (W+-H)*(W+-F) working forward.,jrconrad,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given],H[4;1,3;Modus Ponens],(--W+(-H*-F))[5;2;Implication],(H+F)[6;4;Addition],(W+(-H*-F))[7;5;Double Negation]/W",1,TRUE,1,8.623,1,1,1,0,1
+163,25.938,Try to derive -D working forward.,ccyu,1.0.1.0,undefined,1,TRUE,1,47.898,1,1,2,0,1
+164,73.61,Try to derive -W working forward.,ccyu,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification]/(X+S)",1,TRUE,1,6.536,1,2,1,0,1
+165,51.298,Try to derive -B working forward.,ccyu,4.-1.2.1,"(C>D)[1;0;Given],(-B*-F)[2;0;Given],((D>F)+B)[3;0;Given]/-C",1,TRUE,3,80.624,2,2,3,0,3
+166,44.641,Try to derive -D working forward.,bjarring,1.0.1.0,undefined,1,TRUE,1,17.096,1,2,2,0,1
+167,27.871,Try to derive -I working forward.,bjarring,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,1,72.979,1,1,1,0,1
+168,171.126,Try to derive Z working forward.,bjarring,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given]/(X+S)",1,TRUE,3,30.217,2,4,3,0,3
+169,37.308,Try to derive -B+-A working forward.,bjarring,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;2,1;Disjunctive Syllogism],(-A+-B)[5;4;Implication]/(-D>-A)",1,TRUE,1,3.732,1,1,1,0,1
+170,142.631,Try to derive -D>B working forward.,bjarring,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;2,1;Disjunctive Syllogism],(-A+-B)[5;4;Implication],(-B+-A)[6;5;Commutative],(--B>-A)[7;6;Implication],(B>-A)[8;7;Double Negation],(--D+B)[9;3;Double Negation]/(-D>-A)",1,TRUE,1,17.598,1,0,1,0,1
+171,76.96,Try to derive H+F working forward.,bjarring,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given],H[4;1,3;Modus Ponens]/W",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+172,118.924,Try to derive S+L working forward.,dsenerc,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;2,3;Modus Ponens]/S",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+173,71.819,Try to derive S+L working forward.,dsenerc,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given],-L[4;3,2;Modus Ponens]/S",1,TRUE,5,-42.911,8,4,3,0,1
+174,299.28,Try to derive F working forward.,dsenerc,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given],-I[4;3;Simplification]/H",1,TRUE,1,2.731,1,2,1,0,1
+175,16.269,Try to derive -L working forward.,kckwazem,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",2,TRUE,1,229.346,1,3,1,0,1
+176,14.219,Try to derive G+Z working forward.,kckwazem,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,1,74.36,2,2,1,0,1
+177,316.615,Try to derive W+-R working forward.,kckwazem,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(G+Z)[4;3;Addition],-W[5;2,4;Modus Ponens]/-R",1,TRUE,1,107.6,2,1,1,0,1
+178,98.53,Try to derive F working forward.,kckwazem,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given],-I[4;3;Simplification]/H",1,TRUE,0,0,1,0,1,0,0
+179,9332.34,Try to derive Z working forward.,kckwazem,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given]/(X+S)",1,TRUE,1,27.82,1,2,1,0,1
+180,9595.9,Try to derive (-Y>X)*(T>S) working forward.,kckwazem,4.1.2.0,"(Z>(-Y>X))[1;0;Given],(Z*-W)[2;0;Given],(W+(T>S))[3;0;Given],(-Y+T)[4;0;Given],Z[5;2;Simplification],-W[6;2;Simplification],(-Y>X)[7;1,5;Modus Ponens],(T>S)[8;6,3;Disjunctive Syllogism]/(X+S)",1,TRUE,1,46.56,1,2,1,0,1
+181,30.612,Try to derive -Y working forward.,kckwazem,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given],-F[3;2;Double Negation]/-(Y+F)",1,TRUE,0,0,1,0,1,0,0
+182,59.151,Try to derive -S>B working forward.,kckwazem,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+183,119.047,Try to derive A working forward.,wbotuel,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",4,TRUE,3,83.239,2,3,3,0,1
+184,3.302,Try to derive -L working forward.,wbotuel,1.0.2.0,"(B*(S+L))[1;0;Given],(-U>-L)[2;0;Given],-U[3;0;Given]/S",3,TRUE,1,40.389,1,2,1,0,1
+185,3.52,Try to derive A>-B working forward.,wbotuel,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",4,TRUE,1,13.255,1,2,1,0,1
+186,71.876,Try to derive -D>-A working forward.,wbotuel,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;1,2;Disjunctive Syllogism],(-D>B)[5;3;Implication],(--B>-A)[6;4;Contrapositive],(B>-A)[7;6;Double Negation]/(-D>-A)",4,TRUE,1,24.692,1,2,1,0,1
+187,3.059,Try to derive (Y>P)*(P>Y) working forward.,wbotuel,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",4,TRUE,1,8.694,1,1,1,0,1
+188,925.568,Try to derive W+-R working forward.,esworthy,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(G+Z)[4;3;Addition],-W[5;2,4;Modus Ponens]/-R",2,TRUE,1,118.392,2,2,1,0,1
+189,17.519,Try to derive -I working forward.,esworthy,2.-1.1.0,"((F+G)>H)[1;0;Given],(I+F)[2;0;Given],(-I*J)[3;0;Given]/H",1,TRUE,1,5.285,1,1,1,0,1
+190,13.393,Try to derive I>D working forward.,esworthy,3.-1.3.1,"((S>D)+I)[1;0;Given],((-S+Q)>Y)[2;0;Given],-D[3;0;Given],(-D>-I)[4;0;Given]/Y",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+191,32.433,Try to derive -Y working forward.,esworthy,5.-1.3.0,"(Y>F)[1;0;Given],---F[2;0;Given],-F[3;2;Double Negation]/-(Y+F)",1,TRUE,1,2.243,1,2,1,0,1
+192,346.175,Try to derive -W working forward.,hrpoe,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(G+Z)[4;3;Addition]/-R",1,TRUE,0,0,1,0,1,0,0
+193,12.727,Try to derive -Z working forward.,hrpoe,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",2,TRUE,1,77.531,3,2,1,0,1
+194,10.78,Try to derive A>-B working forward.,hrpoe,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,1,11.67,2,1,1,0,1
+195,228.138,Try to derive -D>-A working forward.,hrpoe,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;2,1;Disjunctive Syllogism],(-D>B)[5;3;Implication],(--B>-A)[6;4;Contrapositive],(B>-A)[7;6;Double Negation]/(-D>-A)",1,TRUE,0,0,1,0,1,0,0
+196,100.455,Try to derive J+-N working forward.,hrpoe,6.1.2.0,"(B=-J)[1;0;Given],(-N+J)[2;0;Given],(B+-N)[3;0;Given]/(B>-N)",4,TRUE,1,-79.695,2,2,1,1,1
+197,71.759,Try to derive (B>-J)*(-J>B) working forward.,hrpoe,6.1.2.0,"(B=-J)[1;0;Given],(-N+J)[2;0;Given],(B+-N)[3;0;Given],(J+-N)[4;2;Commutative],(--J+-N)[5;4;Double Negation],(-J>-N)[6;5;Implication]/(B>-N)",4,TRUE,1,5.916,1,1,1,0,1
+198,4398.37,Try to derive A working forward.,gtstewar,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification]/B",4,TRUE,4,1136.17,2,3,3,2,2
+199,5645.31,Try to derive C working forward.,gtstewar,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification],E[5;3;Simplification],A[6;2,4;Disjunctive Syllogism],(B*C)[7;1,6;Modus Ponens]/B",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+200,40.002,Try to derive G+Z working forward.,gtstewar,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,7,612.411,8,5,2,3,1
+201,711.802,Try to derive W+-R working forward.,gtstewar,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(G+Z)[4;3;Addition],-W[5;2,4;Modus Ponens]/-R",1,TRUE,1,8.152,1,0,1,0,1
+202,37.29,Try to derive -Z working forward.,gtstewar,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,14.553,1,1,1,0,1
+203,4.659,Try to derive H working forward.,gtstewar,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",2,TRUE,1,12.923,1,2,1,0,1
+204,89.543,Try to derive -(-H*-F) working forward.,gtstewar,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given],H[4;1,3;Modus Ponens],(H+F)[5;4;Addition],(--H+F)[6;5;Double Negation],(--H+--F)[7;6;Double Negation]/W",3,FALSE,NA,NA,NA,NA,NA,NA,NA
+205,54.283,Try to derive (Y>P)*(P>Y) working forward.,gtstewar,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",1,TRUE,1,6.614,1,1,1,0,1
+206,14.357,Try to derive (C>-J)*(-J>C) working forward.,gtstewar,6.-1.3.1,"(C=-J)[1;0;Given],(C+-N)[2;0;Given],(N>C)[3;0;Given]/(N>-J)",1,TRUE,1,2.212,1,1,1,0,1
+207,15.578,Try to derive -D working forward.,cnray2,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given]/B",1,TRUE,1,5.973,1,1,1,0,1
+208,43.887,Try to derive -J working forward.,cnray2,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given],-Z[4;2;Simplification]/((J+L)+K)",1,TRUE,1,1.23,1,1,1,0,1
+209,2.508,Try to derive -D working forward.,smonser,1.0.1.0,undefined,4,TRUE,4,181.197,1,3,2,0,1
+210,208.886,Try to derive B*C working forward.,smonser,1.0.1.0,"(A>(B*C))[1;0;Given],(A+D)[2;0;Given],(-D*E)[3;0;Given],-D[4;3;Simplification],A[5;2,4;Disjunctive Syllogism]/B",4,TRUE,1,21.57,1,2,1,0,1
+211,11.234,Try to derive G+Z working forward.,sabeesle,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,3,375.849,5,1,3,0,1
+212,20.719,Try to derive -Z working forward.,sabeesle,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,TRUE,1,14.589,1,2,1,0,1
+213,25.537,Try to derive H working forward.,sabeesle,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,0,0,1,0,1,0,0
+214,22.224,Try to derive (Y>P)*(P>Y) working forward.,sabeesle,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",1,TRUE,1,145.507,3,1,1,0,1
+215,12.492,Try to derive G+Z working forward.,cgtacker,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given]/-R",1,TRUE,2,163.547,4,3,2,0,2
+216,39.35,Try to derive -Z working forward.,cgtacker,3.-1.1.0,"(K+J)[1;0;Given],(-Z*-R)[2;0;Given],(J>Z)[3;0;Given]/((J+L)+K)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+217,36.084,Try to derive -S>B working forward.,cgtacker,6.1.1.0,"(S+B)[1;0;Given],(B>D)[2;0;Given],(S>G)[3;0;Given]/(D+G)",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+218,98.53,Try to derive G+Z working forward.,wdhall3,1.0.3.0,"((W+-R)*N)[1;0;Given],((G+Z)>-W)[2;0;Given],Z[3;0;Given],(W+-R)[4;1;Simplification]/-R",4,TRUE,1,182.835,3,0,1,0,1
+219,11.245,Try to derive -Q working forward.,wdhall3,2.1.1.0,"((-T*S)>-R)[1;0;Given],-T[2;0;Given],((-Q+P)>S)[3;0;Given],(Q>T)[4;0;Given]/(-R+N)",2,TRUE,1,126.904,1,2,1,0,1
+220,626.856,Try to derive S*-T working forward.,wdhall3,2.1.1.0,"((-T*S)>-R)[1;0;Given],-T[2;0;Given],((-Q+P)>S)[3;0;Given],(Q>T)[4;0;Given],-Q[5;2,4;Modus Tollens],(-Q+P)[6;5;Addition],S[7;3,6;Modus Ponens],(-T+S)[8;7;Addition]/(-R+N)",3,FALSE,NA,NA,NA,NA,NA,NA,NA
+221,111.396,Try to derive A>-B working forward.,wdhall3,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given]/(-D>-A)",1,TRUE,1,10.225,1,2,1,0,1
+222,254.924,Try to derive -D>-A working forward.,wdhall3,5.1.1.0,"((A>-B)+C)[1;0;Given],-C[2;0;Given],(D+B)[3;0;Given],(A>-B)[4;2,1;Disjunctive Syllogism],(--B>-A)[5;4;Contrapositive],(B>-A)[6;5;Double Negation],(-D>B)[7;3;Implication]/(-D>-A)",1,TRUE,0,0,1,0,1,0,0
+223,10.474,Try to derive H working forward.,wdhall3,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given]/W",1,TRUE,2,37.984,3,2,2,0,2
+224,164.52,Try to derive H+F working forward.,wdhall3,6.-1.2.0,"(J>H)[1;0;Given],(-W>(-H*-F))[2;0;Given],J[3;0;Given],H[4;3,1;Modus Ponens]/W",1,FALSE,NA,NA,NA,NA,NA,NA,NA
+225,29.431,Try to derive (Y>P)*(P>Y) working forward.,wdhall3,6.-1.3.0,"(Y=P)[1;0;Given],(-Y>-C)[2;0;Given],(-P=-C)[3;0;Given]/(Y>C)",3,TRUE,1,53.169,1,3,1,0,1
+226,19.386,Try to derive (C>-J)*(-J>C) working forward.,wdhall3,6.-1.3.1,"(C=-J)[1;0;Given],(C+-N)[2;0;Given],(N>C)[3;0;Given]/(N>-J)",1,TRUE,1,4.174,1,1,1,0,1

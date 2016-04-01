@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.csv.*;
 
-public class Row implements Comparable<Row>{
+public class Row{
 	public CSVRecord record;
 	public List<String> list;
 	
@@ -15,12 +15,5 @@ public class Row implements Comparable<Row>{
 			list.add(record.get(i));
 		}
 	}
-	@Override
-	public int compareTo(Row o) {
-		double result = Double.parseDouble(this.record.get(23))-Double.parseDouble(o.record.get(23));
-		if (result > 0) return 1;
-		else if (result < 0) return -1;
-		else return 0;
-	}
-
+	
 }
