@@ -49,6 +49,51 @@ public class Parser {
 		}
 	}
 	
+	public static void updateNumAction() {
+		for (String key: recordsByStudent.keySet()) {
+			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				int[] numActionCurr = new int[10]; //number of action for current attempt
+				int[] numActionTotal = new int[10]; //total number of action for each problem
+				
+				// initialize numActionCurr and numActionTotal
+				for (int i = 0; i < numActionCurr.length; i++) {
+					numActionCurr[i] = 0;
+					numActionTotal[i] = 0;
+				}
+				
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				double lastElTime = 0.0;
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					int action = Integer.parseInt(row.list.get(headerMap.get("action")));
+					double currElTime = Double.parseDouble(row.list.get(headerMap.get("elTime")));
+					
+					// if restart attempt, reset numActionCurr, add 1 to numActionCurr[i]
+					if (currElTime < lastElTime) {
+						for (int j = 0; j < numActionCurr.length; j++) {
+							numActionCurr[j] = 0;
+						}
+					}
+					
+					if (action < 1 || action >10) continue;
+					
+					numActionCurr[action-1]++;
+					numActionTotal[action-1]++;
+					lastElTime = currElTime;
+					
+					// update numActionCurr and numActionTotal columns
+					for (int j = 0; j < numActionCurr.length; j++) {
+						String colNameCurr = "numAction" + Integer.toString(j+1) + "Curr";
+						String colNameTotal = "numAction" + Integer.toString(j+1) + "Total";
+						row.list.set(headerMap.get(colNameCurr), Integer.toString(numActionCurr[j]));
+						row.list.set(headerMap.get(colNameTotal), Integer.toString(numActionTotal[j]));
+					}
+				}
+			}
+		}
+	}
+	
 	public static void updateNumInteraction() {
 		for (String key: recordsByStudent.keySet()) {
 			Map<String,List<Row>> recordsByProblem = recordsByStudent.get(key);
@@ -93,6 +138,43 @@ public class Parser {
 		}
 	}
 	
+	public static void updateStepTime() {
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				double lastElTime = 0.0;
+				
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					double currElTime = Double.parseDouble(row.list.get(headerMap.get("elTime")));
+					
+					if (currElTime < lastElTime) row.list.set(headerMap.get("stepTime"), Double.toString(currElTime));
+					else row.list.set(headerMap.get("stepTime"), Double.toString(currElTime-lastElTime));
+					
+					lastElTime = currElTime;
+				}
+			}
+		}
+	}
+	
+	public static void updateIsForced() {
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					if (row.list.get(headerMap.get("action")).equals("7"))
+						row.list.set(headerMap.get("isForced"), "0");
+					else
+						row.list.set(headerMap.get("isForced"), "1");
+				}
+			}
+		}
+	}
+	
 	public static void outputInOneFile(String filePath) throws IOException{
 		if (headerMap == null) {
 			System.out.println("No headerMap.");
@@ -111,6 +193,29 @@ public class Parser {
 					Object[] obj = row.list.toArray();
 					printer.printRecord(obj);
 				}
+			}
+		}
+		printer.close();
+	}
+	
+	public static void outputHintFollowRecords(String filePath) throws IOException {
+		String[] header = headerMap.keySet().toArray(new String[headerMap.keySet().size()]);
+		CSVPrinter printer = new CSVPrinter(new FileWriter(filePath),CSVFormat.EXCEL.withHeader(header));
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					
+					// Change Restrictions on which lines to print here
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")) {
+						Object[] obj = row.list.toArray();
+						printer.printRecord(obj);
+					}
+				}
+				
 			}
 		}
 		printer.close();
@@ -173,6 +278,7 @@ public class Parser {
 		}
 		System.out.println("checkRecordNumber: " + checkRecordNumber);
 	}
+
 	
 	private static boolean isUnwantedRow(CSVRecord record) {
 		if (record.get(headerMap.get("rule")).equals("login")) return true;
@@ -199,11 +305,32 @@ public class Parser {
 			Parser.updateNumAttempts();
 			System.out.println();
 			
+			System.out.println("Updating number of action both for current attempt and for the problem...");
+			Parser.updateNumAction();
+			System.out.println();
+			
+			System.out.println("Updating stepTime...");
+			Parser.updateStepTime();
+			System.out.println();
+			
+			System.out.println("Updating isForced...");
+			Parser.updateIsForced();
+			System.out.println();
+			
+			
 			System.out.println("Outputing records into one file...");
 			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");
 			System.out.println();
 			
+			System.out.println("Outputing hint follow records into one file...");
+			Parser.outputHintFollowRecords("../../data/DT6_Cond5_HintFollow.csv");
+			System.out.println();
+			
 			System.out.println("Completed!");
+			
+			
+			
+			
 //			DataRow d = new DataRow();
 //			DataRow a = new DataRow();
 //			d.interaction = 5;
