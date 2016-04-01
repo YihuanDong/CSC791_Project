@@ -1,0 +1,9 @@
+*/bin
+*.graphml
+*.RData
+*.Rhistory
+*/.Rproj.user
+.Rproj.user
+Java/.metadata
+Java/.recommenders
+Java/RemoteSystemsTempFiles
