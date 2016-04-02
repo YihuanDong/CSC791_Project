@@ -257,7 +257,8 @@ public class Parser {
 					Row row = recordsForCurrPrb.get(i);
 					
 					// Change Restrictions on which lines to print here
-					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")) {
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")
+							&& !row.list.get(headerMap.get("action")).equals("98")) {
 						Object[] obj = row.list.toArray();
 						printer.printRecord(obj);
 					}
@@ -331,13 +332,15 @@ public class Parser {
 		if (record.get(headerMap.get("rule")).equals("login")) return true;
 		if (record.get(headerMap.get("rule")).equals("#NAME?")) return true;
 		if (record.get(headerMap.get("rule")).equals("next")) return true;
+		if (record.get(headerMap.get("action")).equals("8")) return true;
+//		if (!record.get(headerMap.get("collaborators")).equals("")) return true;
 		return false;
 	}
 
 	public static void main(String[] args) {
 		try {
 			System.out.println("Spliting Record...");
-			Parser.splitRecord("../../data/DT6_Cond5_ActionTable.csv");
+			Parser.splitRecord("../../data/DT6_Cond6/DT6_Cond6_ActionTable.csv");
 			System.out.println();
 			
 			System.out.println("Updating number of Interaction...");
@@ -365,15 +368,15 @@ public class Parser {
 			System.out.println();
 			
 			System.out.println("Updating hintFollow...");
-			Parser.updateHintFollow("../../data/DT6_Cond5_Stat.csv");
+			Parser.updateHintFollow("../../data/DT6_Cond6/DT6_Cond6_Stat.csv");
 			System.out.println();
 			
 			System.out.println("Outputing records into one file...");
-			Parser.outputInOneFile("../../data/DT6_Cond5_ActionTable_Filled.csv");
+			Parser.outputInOneFile("../../data/DT6_Cond6/DT6_Cond6_ActionTable_Filled.csv");
 			System.out.println();
 			
 			System.out.println("Outputing hint follow records into one file...");
-			Parser.outputHintFollowRecords("../../data/DT6_Cond5_HintFollow.csv");
+			Parser.outputHintFollowRecords("../../data/DT6_Cond6/DT6_Cond6_HintFollow.csv");
 			System.out.println();
 			
 			System.out.println("Completed!");

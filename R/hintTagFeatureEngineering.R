@@ -14,6 +14,9 @@ dataCleansing<-function(data){
   
   #remove duplicate hint request on the same state
   #data<-data[!(data$rule %in% "get" & duplicated(data[,c("rule", "preState", "currPrb","hintGiven")])),]
+  
+  #remove data with collaborators
+  #data<-data[!data$collaborators=="",]
   return (data)  
 }
 
