@@ -162,6 +162,7 @@ mainHintFollowingStats<-function(studentProblemHintData, hint){
   stateChange<-which(grepl(regexEscapeChar(hintedRuleStates), statesSeq$postState))
   if (length(stateChange) !=0){ #hint is followed
     row<-data.frame(lvl1HintFollowed=TRUE, stateChangedB4FollowHint=stateChange[[1]]-1)
+    print(stateChange[[1]]-1)
     row<-cbind(row, calcMainHintFollowingStats(studentProblemHintData,
                                                which(grepl(regexEscapeChar(hintedRuleStates), studentProblemHintData$postState))[[1]]))
   }
