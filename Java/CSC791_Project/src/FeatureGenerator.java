@@ -72,6 +72,7 @@ public class FeatureGenerator {
 		return false;
 	}
 	
+	// Output all records in recordsByStudent to a single csv file.
 	public static void outputRecords(String file) throws IOException{
 		if (headerMap == null) {
 			System.out.println("No headerMap.");
@@ -95,6 +96,151 @@ public class FeatureGenerator {
 		printer.close();
 	}
 	
+	// Calculate Feature
+	public static void CalculateFeatures() {
+		/********************************************
+		* DECLARE: features for all students here.
+		*********************************************/
+		
+		for (String key: recordsByStudent.keySet()) {
+			/**********************************************
+			* DECLARE: features for a single student here.
+			***********************************************/
+			int numProblemsCompleted = 0;
+		
+			
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				/*********************************************
+				* DECLARE: features for a single problem here.
+				**********************************************/
+				double lastElTime = 0.0; // used to determine the start of a new attempt
+				int numInteractionCurr = 0; 
+				int numInteractionTotal = 0;
+				int numAttempts = 1;
+				int[] numActionCurr = new int[10];
+				int[] numActionTotal = new int[10];
+				
+				
+				
+				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
+				for (int i = 0; i < recordForCurrPrb.size(); i++) {
+					Row row = recordForCurrPrb.get(i);
+					int action = Integer.parseInt(row.list.get(headerMap.get("action"))); 
+					double stepTime = 0.0;
+					int isForced = 1;
+					
+					// check if start a new attempt
+					double currElTime =  Double.parseDouble(row.list.get(headerMap.get("elTime")));
+					if (currElTime < lastElTime) {
+						/*****************************
+						 * Reset or Update Current Counters here
+						 *****************************/
+						numInteractionCurr = 0;
+						numAttempts++;
+						stepTime = currElTime;
+						
+						//numActionCurr
+						for (int j = 0; j < numActionCurr.length; j++) {
+							numActionCurr[j] = 0;
+						}
+					} else {
+						stepTime = currElTime - lastElTime;
+					}
+					lastElTime = currElTime;
+					
+					/********************************
+					 * Calculate Current feature here
+					 ********************************/
+					numInteractionCurr++;
+
+					//numActionCurr
+					if (action >= 1 && action <= 10) numActionCurr[action-1]++;
+					
+					//isForced
+					if (row.list.get(headerMap.get("action")).equals("7")) isForced = 0;
+					else isForced = 1;
+					
+					/********************************
+					 * Calculate Total feature here
+					 ********************************/
+					numInteractionTotal = i+1;
+					
+					//numActionTotal
+					if (action >= 1 && action <= 10) numActionTotal[action-1]++;
+					
+					/*******************************
+					 * Calculate Tutor feature here
+					 *******************************/
+					//numProblemsCompleted
+					if (row.list.get(headerMap.get("action")).equals("98")) {
+						numProblemsCompleted++;
+					}
+					
+					
+					/****************************
+					 * Update feature value here
+					 ****************************/
+					row.list.set(headerMap.get("numInteractionCurr"), Integer.toString(numInteractionCurr));
+					row.list.set(headerMap.get("numInteractionTotal"), Integer.toString(numInteractionTotal));
+					row.list.set(headerMap.get("numProblemsCompleted"), Integer.toString(numProblemsCompleted));
+					row.list.set(headerMap.get("numAttempts"), Integer.toString(numAttempts));
+					row.list.set(headerMap.get("stepTime"), Double.toString(stepTime));
+					row.list.set(headerMap.get("isForced"), Integer.toString(isForced));
+					
+					// numActionCurr and numActionTotal
+					for (int j = 0; j < numActionCurr.length; j++) {
+						String colNameCurr = "numAction" + Integer.toString(j+1) + "Curr";
+						String colNameTotal = "numAction" + Integer.toString(j+1) + "Total";
+						row.list.set(headerMap.get(colNameCurr), Integer.toString(numActionCurr[j]));
+						row.list.set(headerMap.get(colNameTotal), Integer.toString(numActionTotal[j]));
+					}
+				}
+			}
+		}
+	}
+	
+	public static void updateHintFollow(String file) throws IOException{
+		CSVParser parser = new CSVParser(new FileReader(file), CSVFormat.DEFAULT.withHeader());
+		Map<String, Integer> header = parser.getHeaderMap();
+		
+		List<Row> statsRecords = new LinkedList<Row>();
+		for (CSVRecord record: parser) {
+			statsRecords.add(new Row(record));
+		}
+		
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					
+					String studentID = row.list.get(headerMap.get("studentID"));
+					String currPrb = row.list.get(headerMap.get("currPrb"));
+					String elTime = row.list.get(headerMap.get("elTime"));
+					int hintFollow = -1;
+					
+					for (int j = 0; j < statsRecords.size(); j++) {
+						Row hintRow = statsRecords.get(j);
+						
+						if (studentID.equals(hintRow.list.get(header.get("studentID")))
+								&& currPrb.equals(hintRow.list.get(header.get("currPrb")))
+								&& elTime.equals(hintRow.list.get(header.get("elTime")))) {
+							if (Boolean.parseBoolean(hintRow.list.get(header.get("lvl1HintFollowed"))))
+								hintFollow = 1;
+							else
+								hintFollow = 0;
+							//System.out.println(hintFollow);
+							break;
+						}
+					}
+					
+					row.list.set(headerMap.get("hintFollow"), Integer.toString(hintFollow));
+				}
+			}
+		}
+	}
 	
 	public static void main(String[] args) {
 		try {
@@ -102,12 +248,13 @@ public class FeatureGenerator {
 			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "DT6_Cond6_ActionTable.csv");
 			System.out.println();
 			
+			System.out.println("Calculating Features...");
+			FeatureGenerator.CalculateFeatures();
+			System.out.println();
 			
-			
-			
-			
-			
-			
+			System.out.println("Updating hintFollow...");
+			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "DT6_Cond6_Stat.csv");
+			System.out.println();
 			
 			System.out.println("Outputing records into one file...");
 			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/DT6_Cond6_ActionTable_Filled.csv");
