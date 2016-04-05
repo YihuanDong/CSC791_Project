@@ -215,6 +215,7 @@ public class FeatureGenerator {
 				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
 				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
 					Row row = recordsForCurrPrb.get(i);
+					if (!row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")) continue;
 					
 					String studentID = row.list.get(headerMap.get("studentID"));
 					String currPrb = row.list.get(headerMap.get("currPrb"));
@@ -242,6 +243,30 @@ public class FeatureGenerator {
 		}
 	}
 	
+	public static void outputHintFollowRecords(String filePath) throws IOException {
+		String[] header = headerMap.keySet().toArray(new String[headerMap.keySet().size()]);
+		CSVPrinter printer = new CSVPrinter(new FileWriter(filePath),CSVFormat.EXCEL.withHeader(header));
+		for (String key: recordsByStudent.keySet()) {
+			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
+			for (String key1: recordsByProblem.keySet()) {
+				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
+				
+				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
+					Row row = recordsForCurrPrb.get(i);
+					
+					// Change Restrictions on which lines to print here
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")
+							&& !row.list.get(headerMap.get("action")).equals("98")) {
+						Object[] obj = row.list.toArray();
+						printer.printRecord(obj);
+					}
+				}
+				
+			}
+		}
+		printer.close();
+	}
+	
 	public static void main(String[] args) {
 		try {
 			System.out.println("Spliting Record...");
@@ -252,12 +277,18 @@ public class FeatureGenerator {
 			FeatureGenerator.CalculateFeatures();
 			System.out.println();
 			
+			// refactor to only do search if is a hint.
 			System.out.println("Updating hintFollow...");
 			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "DT6_Cond6_Stat.csv");
 			System.out.println();
 			
 			System.out.println("Outputing records into one file...");
 			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/DT6_Cond6_ActionTable_Filled.csv");
+			System.out.println();
+			
+			// refactor to only output columns after currPrb
+			System.out.println("Outputing hint follow records into one file...");
+			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "DT6_Cond6_HintFollow.csv");
 			System.out.println();
 			
 			System.out.println("Completed!");
