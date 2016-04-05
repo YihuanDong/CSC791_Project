@@ -13,7 +13,7 @@ import org.apache.commons.csv.CSVRecord;
 
 
 public class FeatureGenerator {
-	public static final String DATA_DIR = "../../data/DT6/";
+	public static final String DATA_DIR = "../../data/Cond5/";
 	
 	// Save the header into csv, for getting the column number with header name
 	private static Map<String,Integer> headerMap;
@@ -31,7 +31,7 @@ public class FeatureGenerator {
 		
 		for (CSVRecord record: parser) {
 			// if the rule doesn't meet these requirements, discard the row
-			if (isUnwantedRow(record)) continue;
+//			if (isUnwantedRow(record)) continue;
 			
 			String studentID = record.get(headerMap.get("studentID"));
 			
@@ -270,7 +270,7 @@ public class FeatureGenerator {
 	public static void main(String[] args) {
 		try {
 			System.out.println("Spliting Record...");
-			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "DT6_Cond6_ActionTable.csv");
+			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "Cond5_Ready.csv");
 			System.out.println();
 			
 			System.out.println("Calculating Features...");
@@ -278,18 +278,18 @@ public class FeatureGenerator {
 			System.out.println();
 			
 			// refactor to only do search if is a hint.
-			System.out.println("Updating hintFollow...");
-			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "DT6_Cond6_Stat.csv");
-			System.out.println();
+//			System.out.println("Updating hintFollow...");
+//			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "DT6_Cond6_Stat.csv");
+//			System.out.println();
 			
 			System.out.println("Outputing records into one file...");
-			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/DT6_Cond6_ActionTable_Filled.csv");
+			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/Cond5_Filled.csv");
 			System.out.println();
 			
 			// refactor to only output columns after currPrb
-			System.out.println("Outputing hint follow records into one file...");
-			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "DT6_Cond6_HintFollow.csv");
-			System.out.println();
+//			System.out.println("Outputing hint follow records into one file...");
+//			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "DT6_Cond6_HintFollow.csv");
+//			System.out.println();
 			
 			System.out.println("Completed!");
 		} catch (IOException ex) {

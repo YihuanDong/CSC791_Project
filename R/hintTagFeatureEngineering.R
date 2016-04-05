@@ -35,7 +35,7 @@ dataCleansing<-function(data){
   #Click on empty area -1
   data<-data[data$action != -1,]
   #Rule Description Button Press 4
-  data<-data[data$action != 4,]
+  #data<-data[data$action != 4,]
   #Instructions Button Pressed 11
   data<-data[data$action != 11,]
   #Window Information Button Pressed 12
@@ -46,10 +46,12 @@ dataCleansing<-function(data){
   data<-data[data$action != 14,]
   
   #===delete rows with errors
+  #System failure (thrown/caught exception)
+  data<-data[data$error != -1,]
   #Rule requires one justified premises 1
-  data<-data[data$error != 1,]
+  #data<-data[data$error != 1,]
   #Rule requires two justified premises 2
-  data<-data[data$error != 2,]
+  #data<-data[data$error != 2,]
   #Attempt to apply rule to conclusion 3
   data<-data[data$error != 3,]
   #Attempt to change proof direction mid-proof 4
@@ -61,7 +63,7 @@ dataCleansing<-function(data){
   #Form/Instantiation Validation Error, try again 7
   data<-data[data$error != 7,]
   #Redundant rule application 8
-  data<-data[data$error != 8,]
+  #data<-data[data$error != 8,]
   #Block exists and already has parents 9
   data<-data[data$error != 9,]
   #Incorrect rule application 10
@@ -69,11 +71,12 @@ dataCleansing<-function(data){
   #Tried to apply rule to underived block but did not use ‘?’ button 11
   data<-data[data$error != 11,]
   #When the user applied a rule but did not enter anything into the prompt box 12
-  data<-data[data$error != 12,]
+  #data<-data[data$error != 12,]
   
   #remove change direct/indirection proof; remove end; remove rule with #NAME? or login
-  data<-data[data$action != 8,]
-  data<-data[data$action != 98,]
+  #data<-data[data$action != 8,]
+  #data<-data[data$action != 98,]
+  data<-data[data$rule != "login",]
   data<-data[data$rule != "#NAME?",]
   data<-data[!(data$preState=="" | data$postState=="undefined"),]
   
