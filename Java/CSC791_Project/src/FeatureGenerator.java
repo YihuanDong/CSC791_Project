@@ -130,6 +130,9 @@ public class FeatureGenerator {
 					double stepTime = 0.0;
 					int isForced = 0;
 					int hasCollaborator = 0;
+					String[] RuleNames = new String[] {"scoreMP","scoreDS", "scoreSIMP", "scoreMT", "scoreADD", "scoreCONJ", "scoreHS", "scoreCD", "scoreDN", 
+							"scoreDEM", "scoreIMPL", "scoreCP", "scoreEQUIV", "scoreNULL", "scoreCOM", "scoreASSOC", "scoreDIST", "scoreABS", "scoreEXP", "scoreTAUT", "scoreDel"};
+	
 					
 					// check if start a new attempt
 					double currElTime =  Double.parseDouble(row.list.get(headerMap.get("elTime")));
@@ -199,6 +202,13 @@ public class FeatureGenerator {
 						row.list.set(headerMap.get(colNameCurr), Integer.toString(numActionCurr[j]));
 						row.list.set(headerMap.get(colNameTotal), Integer.toString(numActionTotal[j]));
 					}
+					
+					// PL[Rule]
+					for (int j = 0; j < RuleNames.length; j++) {
+						String colName = RuleNames[j].replaceFirst("score", "PL");
+						String ruleScore = getPL(row.list.get(headerMap.get(RuleNames[j])));
+						row.list.set(headerMap.get(colName), ruleScore);
+					}
 				}
 			}
 		}
@@ -236,7 +246,6 @@ public class FeatureGenerator {
 								hintFollow = 1;
 							else
 								hintFollow = 0;
-							//System.out.println(hintFollow);
 							break;
 						}
 					}
@@ -270,7 +279,24 @@ public class FeatureGenerator {
 		}
 		printer.close();
 	}
+
+	/*********************
+	 * Helper Functions
+	 ********************/
+	/***************
+	 * get probability of initial learning from KT scores
+	 * @param KT: KT score in format: 0.01;0.01;0.3;0.1
+	 * @return PL: First number of KT Score (Probability of initial leaning
+	 */
+	private static String getPL(String KT) {
+		String PL = KT.substring(0, KT.indexOf(";"));
+		return PL;
+	}
 	
+	
+	/*****************
+	 * Main Function
+	 ****************/
 	public static void main(String[] args) {
 		try {
 			System.out.println("Spliting Record...");
