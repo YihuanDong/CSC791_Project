@@ -128,7 +128,8 @@ public class FeatureGenerator {
 					Row row = recordForCurrPrb.get(i);
 					int action = Integer.parseInt(row.list.get(headerMap.get("action"))); 
 					double stepTime = 0.0;
-					int isForced = 1;
+					int isForced = 0;
+					int hasCollaborator = 0;
 					
 					// check if start a new attempt
 					double currElTime =  Double.parseDouble(row.list.get(headerMap.get("elTime")));
@@ -158,8 +159,10 @@ public class FeatureGenerator {
 					if (action >= 1 && action <= 10) numActionCurr[action-1]++;
 					
 					//isForced
-					if (row.list.get(headerMap.get("action")).equals("7")) isForced = 0;
-					else isForced = 1;
+					if (!row.list.get(headerMap.get("action")).equals("7")) isForced = 1;
+					
+					//hasCollaborator
+					if (!row.list.get(headerMap.get("collaborators")).equals("")) hasCollaborator = 1;
 					
 					/********************************
 					 * Calculate Total feature here
@@ -187,6 +190,7 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("numAttempts"), Integer.toString(numAttempts));
 					row.list.set(headerMap.get("stepTime"), Double.toString(stepTime));
 					row.list.set(headerMap.get("isForced"), Integer.toString(isForced));
+					row.list.set(headerMap.get("hasCollaborator"), Integer.toString(hasCollaborator));
 					
 					// numActionCurr and numActionTotal
 					for (int j = 0; j < numActionCurr.length; j++) {

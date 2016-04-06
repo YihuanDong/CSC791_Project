@@ -10,6 +10,7 @@ dataCleansing<-function(data){
   data$selfExplain <- NULL
   data$message <- NULL
   data$dateTime <- NULL
+  data$problemType <- NULL
   
   
   data$RLpolicy <- NULL
