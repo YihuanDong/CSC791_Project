@@ -1,6 +1,7 @@
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -101,6 +102,11 @@ public class FeatureGenerator {
 		/********************************************
 		* DECLARE: features for all students here.
 		*********************************************/
+		String[] strRuleNames = new String[] {"MP","DS", "SIMP", "MT", "ADD", "CONJ", "HS", "CD", "DN", 
+				"DEM", "IMPL", "CP", "EQUIV", "NULL", "COM", "ASSOC", "DIST", "ABS", "EXP", "TAUT", "Del"};
+		List<String> RuleNames = new LinkedList<String>();
+		
+		for(int i = 0; i < strRuleNames.length; i++) RuleNames.add(strRuleNames[i]);
 		
 		for (String key: recordsByStudent.keySet()) {
 			/**********************************************
@@ -120,9 +126,16 @@ public class FeatureGenerator {
 				int numAttempts = 1;
 				int[] numActionCurr = new int[10];
 				int[] numActionTotal = new int[10];
+				Map<String,Integer> numCorrectRuleCurr = new HashMap<String,Integer>();
+				Map<String,Integer> numCorrectRuleTotal = new HashMap<String,Integer>();
 				
+				// Initialize map
+				for (int i = 0; i < RuleNames.size(); i++) {
+					numCorrectRuleCurr.put(RuleNames.get(i), 0);
+					numCorrectRuleTotal.put(RuleNames.get(i), 0);
+				}
 				
-				
+				// Loop through rows for current problem
 				List<Row> recordForCurrPrb = recordsByProblem.get(key1);
 				for (int i = 0; i < recordForCurrPrb.size(); i++) {
 					Row row = recordForCurrPrb.get(i);
@@ -130,24 +143,28 @@ public class FeatureGenerator {
 					double stepTime = 0.0;
 					int isForced = 0;
 					int hasCollaborator = 0;
-					String[] RuleNames = new String[] {"scoreMP","scoreDS", "scoreSIMP", "scoreMT", "scoreADD", "scoreCONJ", "scoreHS", "scoreCD", "scoreDN", 
-							"scoreDEM", "scoreIMPL", "scoreCP", "scoreEQUIV", "scoreNULL", "scoreCOM", "scoreASSOC", "scoreDIST", "scoreABS", "scoreEXP", "scoreTAUT", "scoreDel"};
+					String currPrb = row.list.get(headerMap.get("currPrb"));
+					int error = Integer.parseInt(row.list.get(headerMap.get("error")));
+					String rule = row.list.get(headerMap.get("rule")).toUpperCase();
+					boolean isRule = RuleNames.contains(rule);
 	
 					
 					// check if start a new attempt
 					double currElTime =  Double.parseDouble(row.list.get(headerMap.get("elTime")));
 					if (currElTime < lastElTime) {
-						/*****************************
+						/****************************************
 						 * Reset or Update Current Counters here
-						 *****************************/
+						 ***************************************/
 						numInteractionCurr = 0;
 						numAttempts++;
 						stepTime = currElTime;
 						
 						//numActionCurr
-						for (int j = 0; j < numActionCurr.length; j++) {
-							numActionCurr[j] = 0;
-						}
+						for (int j = 0; j < numActionCurr.length; j++) numActionCurr[j] = 0;
+						
+						//numCorrectRuleCurr
+						for (int j = 0; j < RuleNames.size(); j++) numCorrectRuleCurr.put(RuleNames.get(j), 0);
+						
 					} else {
 						stepTime = currElTime - lastElTime;
 					}
@@ -167,6 +184,12 @@ public class FeatureGenerator {
 					//hasCollaborator
 					if (!row.list.get(headerMap.get("collaborators")).equals("")) hasCollaborator = 1;
 					
+					//numCorrectRuleCurr
+					if (isRule) {
+						if (action == 3 && error == 0) numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)+1);
+						if (action == 5 && error != 0) numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)-1);
+					}
+					
 					/********************************
 					 * Calculate Total feature here
 					 ********************************/
@@ -175,13 +198,17 @@ public class FeatureGenerator {
 					//numActionTotal
 					if (action >= 1 && action <= 10) numActionTotal[action-1]++;
 					
+					//numCorrectRuleTotal
+					if (isRule) {
+						if (action == 3 && error == 0) numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)+1);
+						if (action == 5 && error != 0) numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)-1);
+					}
+					
 					/*******************************
 					 * Calculate Tutor feature here
 					 *******************************/
 					//numProblemsCompleted
-					if (row.list.get(headerMap.get("action")).equals("98")) {
-						numProblemsCompleted++;
-					}
+					if (row.list.get(headerMap.get("action")).equals("98")) numProblemsCompleted++;
 					
 					
 					/****************************
@@ -194,6 +221,7 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("stepTime"), Double.toString(stepTime));
 					row.list.set(headerMap.get("isForced"), Integer.toString(isForced));
 					row.list.set(headerMap.get("hasCollaborator"), Integer.toString(hasCollaborator));
+					row.list.set(headerMap.get("PPLevel"), getPPLevel(currPrb));
 					
 					// numActionCurr and numActionTotal
 					for (int j = 0; j < numActionCurr.length; j++) {
@@ -204,10 +232,16 @@ public class FeatureGenerator {
 					}
 					
 					// PL[Rule]
-					for (int j = 0; j < RuleNames.length; j++) {
-						String colName = RuleNames[j].replaceFirst("score", "PL");
-						String ruleScore = getPL(row.list.get(headerMap.get(RuleNames[j])));
+					for (int j = 0; j < RuleNames.size(); j++) {
+						String colName = "PL" + RuleNames.get(j);
+						String ruleScore = getPL(row.list.get(headerMap.get("score" + RuleNames.get(j))));
 						row.list.set(headerMap.get(colName), ruleScore);
+					}
+					
+					// numCorrectRuleCurr and numCorrectRuleTotal          
+					for (int j = 0; j < RuleNames.size(); j++) {
+						row.list.set(headerMap.get("numCorrect" + RuleNames.get(j) + "Curr"), Integer.toString(numCorrectRuleCurr.get(RuleNames.get(j))));
+						row.list.set(headerMap.get("numCorrect" + RuleNames.get(j) + "Total"), Integer.toString(numCorrectRuleTotal.get(RuleNames.get(j))));
 					}
 				}
 			}
@@ -293,6 +327,15 @@ public class FeatureGenerator {
 		return PL;
 	}
 	
+	/****************
+	 * Get Proficiency level from currPrb
+	 * @param currPrb: format of 1.0.1.0, with second digit as proficiency level
+	 * @return: second digit
+	 */
+	private static String getPPLevel(String currPrb) {
+		return currPrb.replaceAll("\\d\\.(\\d|-\\d)\\.\\d\\.\\d", "$1");
+	}
+	
 	
 	/*****************
 	 * Main Function
@@ -320,6 +363,7 @@ public class FeatureGenerator {
 //			System.out.println("Outputing hint follow records into one file...");
 //			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "DT6_Cond6_HintFollow.csv");
 //			System.out.println();
+			
 			
 			System.out.println("Completed!");
 		} catch (IOException ex) {
