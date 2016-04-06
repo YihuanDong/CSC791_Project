@@ -121,6 +121,7 @@ public class FeatureGenerator {
 				* DECLARE: features for a single problem here.
 				**********************************************/
 				double lastElTime = 0.0; // used to determine the start of a new attempt
+				double elTimeTotal = 0.0;
 				int numInteractionCurr = 0; 
 				int numInteractionTotal = 0;
 				int numAttempts = 1;
@@ -206,6 +207,7 @@ public class FeatureGenerator {
 					 * Calculate Total feature here
 					 ********************************/
 					numInteractionTotal = i+1;
+					elTimeTotal += stepTime;
 					
 					//numActionTotal
 					if (action >= 1 && action <= 10) numActionTotal[action-1]++;
@@ -239,6 +241,7 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("isForced"), Integer.toString(isForced));
 					row.list.set(headerMap.get("hasCollaborator"), Integer.toString(hasCollaborator));
 					row.list.set(headerMap.get("PPLevel"), getPPLevel(currPrb));
+					row.list.set(headerMap.get("elTimeTotal"), Double.toString(elTimeTotal));
 					
 					// numActionCurr and numActionTotal
 					for (int j = 0; j < numActionCurr.length; j++) {
