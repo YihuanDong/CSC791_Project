@@ -103,7 +103,7 @@ public class FeatureGenerator {
 		* DECLARE: features for all students here.
 		*********************************************/
 		String[] strRuleNames = new String[] {"MP","DS", "SIMP", "MT", "ADD", "CONJ", "HS", "CD", "DN", 
-				"DEM", "IMPL", "CP", "EQUIV", "NULL", "COM", "ASSOC", "DIST", "ABS", "EXP", "TAUT", "Del"};
+				"DEM", "IMPL", "CP", "EQUIV", "NULL", "COM", "ASSOC", "DIST", "ABS", "EXP", "TAUT", "DEL"};
 		List<String> RuleNames = new LinkedList<String>();
 		
 		for(int i = 0; i < strRuleNames.length; i++) RuleNames.add(strRuleNames[i]);
@@ -128,11 +128,15 @@ public class FeatureGenerator {
 				int[] numActionTotal = new int[10];
 				Map<String,Integer> numCorrectRuleCurr = new HashMap<String,Integer>();
 				Map<String,Integer> numCorrectRuleTotal = new HashMap<String,Integer>();
+				Map<String,Integer> numWrongRuleCurr = new HashMap<String,Integer>();
+				Map<String,Integer> numWrongRuleTotal = new HashMap<String,Integer>();
 				
 				// Initialize map
 				for (int i = 0; i < RuleNames.size(); i++) {
 					numCorrectRuleCurr.put(RuleNames.get(i), 0);
 					numCorrectRuleTotal.put(RuleNames.get(i), 0);
+					numWrongRuleCurr.put(RuleNames.get(i), 0);
+					numWrongRuleTotal.put(RuleNames.get(i), 0);
 				}
 				
 				// Loop through rows for current problem
@@ -162,8 +166,11 @@ public class FeatureGenerator {
 						//numActionCurr
 						for (int j = 0; j < numActionCurr.length; j++) numActionCurr[j] = 0;
 						
-						//numCorrectRuleCurr
-						for (int j = 0; j < RuleNames.size(); j++) numCorrectRuleCurr.put(RuleNames.get(j), 0);
+						//numCorrectRuleCurr and numWrongRuleCurr
+						for (int j = 0; j < RuleNames.size(); j++) {
+							numCorrectRuleCurr.put(RuleNames.get(j), 0);
+							numWrongRuleCurr.put(RuleNames.get(j), 0);
+						}
 						
 					} else {
 						stepTime = currElTime - lastElTime;
@@ -190,6 +197,11 @@ public class FeatureGenerator {
 						if (action == 5 && error != 0) numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)-1);
 					}
 					
+					//numWrongRuleCurr
+					if (isRule) {
+						if ((action == 3 || action == 5) && error != 0) numWrongRuleCurr.put(rule, numWrongRuleCurr.get(rule)+1);
+					}
+					
 					/********************************
 					 * Calculate Total feature here
 					 ********************************/
@@ -202,6 +214,11 @@ public class FeatureGenerator {
 					if (isRule) {
 						if (action == 3 && error == 0) numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)+1);
 						if (action == 5 && error != 0) numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)-1);
+					}
+					
+					//numWrongRuleTotal
+					if (isRule) {
+						if ((action == 3 || action == 5) && error != 0) numWrongRuleTotal.put(rule, numWrongRuleTotal.get(rule)+1);
 					}
 					
 					/*******************************
@@ -238,10 +255,17 @@ public class FeatureGenerator {
 						row.list.set(headerMap.get(colName), ruleScore);
 					}
 					
-					// numCorrectRuleCurr and numCorrectRuleTotal          
+					// numCorrectRuleCurr, numCorrectRuleTotal, numWrongRuleCurr, numWrongRuleTotal, numRuleCurr, numRuleTotal          
 					for (int j = 0; j < RuleNames.size(); j++) {
+						int numRuleCurr = numCorrectRuleCurr.get(RuleNames.get(j)) + numWrongRuleCurr.get(RuleNames.get(j));
+						int numRuleTotal = numCorrectRuleTotal.get(RuleNames.get(j)) + numWrongRuleTotal.get(RuleNames.get(j));
+						
 						row.list.set(headerMap.get("numCorrect" + RuleNames.get(j) + "Curr"), Integer.toString(numCorrectRuleCurr.get(RuleNames.get(j))));
 						row.list.set(headerMap.get("numCorrect" + RuleNames.get(j) + "Total"), Integer.toString(numCorrectRuleTotal.get(RuleNames.get(j))));
+						row.list.set(headerMap.get("numWrong" + RuleNames.get(j) + "Curr"), Integer.toString(numWrongRuleCurr.get(RuleNames.get(j))));
+						row.list.set(headerMap.get("numWrong" + RuleNames.get(j) + "Total"), Integer.toString(numWrongRuleTotal.get(RuleNames.get(j))));
+						row.list.set(headerMap.get("num" + RuleNames.get(j) + "Curr"), Integer.toString(numRuleCurr));
+						row.list.set(headerMap.get("num" + RuleNames.get(j) + "Total"), Integer.toString(numRuleTotal));
 					}
 				}
 			}
