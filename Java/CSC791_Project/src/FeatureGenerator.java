@@ -14,7 +14,7 @@ import org.apache.commons.csv.CSVRecord;
 
 
 public class FeatureGenerator {
-	public static final String DATA_DIR = "../../data/Cond5/";
+	public static final String DATA_DIR = "../../data/Cond6/";
 	
 	// Save the header into csv, for getting the column number with header name
 	private static Map<String,Integer> headerMap;
@@ -115,6 +115,9 @@ public class FeatureGenerator {
 			int numProblemsCompleted = 0;
 			int hintRequestedTutor = 0;
 			int hintForcedTutor = 0;
+			int hintFollowTutor = 0;
+			int hintRequestedFollowTutor = 0;
+			int hintForcedFollowTutor = 0;
 			
 			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
 			for (String key1: recordsByProblem.keySet()) {
@@ -130,6 +133,14 @@ public class FeatureGenerator {
 				int hintRequestedTotal = 0;
 				int hintForcedCurr = 0;
 				int hintForcedTotal = 0;
+				int hintFollowCurr = 0;
+				int hintFollowTotal = 0;
+				int hintRequestedFollowCurr = 0;
+				int hintRequestedFollowTotal = 0;
+				int hintForcedFollowCurr = 0;
+				int hintForcedFollowTotal = 0;
+				
+				
 				
 				int[] numActionCurr = new int[10];
 				int[] numActionTotal = new int[10];
@@ -158,7 +169,6 @@ public class FeatureGenerator {
 					int error = Integer.parseInt(row.list.get(headerMap.get("error")));
 					String rule = row.list.get(headerMap.get("rule")).toUpperCase();
 					boolean isRule = RuleNames.contains(rule);
-	
 					
 					// check if start a new attempt
 					double currElTime =  Double.parseDouble(row.list.get(headerMap.get("elTime")));
@@ -171,6 +181,9 @@ public class FeatureGenerator {
 						stepTime = currElTime;
 						hintRequestedCurr = 0;
 						hintForcedCurr = 0;
+						hintFollowCurr = 0;
+						hintRequestedFollowCurr = 0;
+						hintForcedFollowCurr = 0;
 						
 						//numActionCurr
 						for (int j = 0; j < numActionCurr.length; j++) numActionCurr[j] = 0;
@@ -217,6 +230,13 @@ public class FeatureGenerator {
 					// hintForcedCurr
 					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedCurr++;
 					
+					// hintFollowCurr, hintRequestedFollowCurr, hintForcedFollowCurr
+					if (row.list.get(headerMap.get("hintFollow")).equals("1")) {
+						hintFollowCurr++;
+						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action == 7) hintRequestedFollowCurr++;
+						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedFollowCurr++;
+					}
+					
 					/********************************
 					 * Calculate Total feature here
 					 ********************************/
@@ -243,6 +263,13 @@ public class FeatureGenerator {
 					// hintForcedTotal
 					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedTotal++;
 					
+					// hintFollowTotal, hintRequestedFollowTotal, hintForcedFollowTotal
+					if (row.list.get(headerMap.get("hintFollow")).equals("1")) {
+						hintFollowTotal++;
+						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action == 7) hintRequestedFollowTotal++;
+						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedFollowTotal++;
+					}
+					
 					/*******************************
 					 * Calculate Tutor feature here
 					 *******************************/
@@ -254,6 +281,13 @@ public class FeatureGenerator {
 					
 					// hintForcedTutor
 					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedTutor++;
+					
+					// hintFollowTutor, hintRequestedFollowTutor, hintForcedFollowTutor
+					if (row.list.get(headerMap.get("hintFollow")).equals("1")) {
+						hintFollowTutor++;
+						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action == 7) hintRequestedFollowTutor++;
+						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedFollowTutor++;
+					}
 					
 					
 					/****************************
@@ -274,6 +308,26 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("hintForcedTotal"), Integer.toString(hintForcedTotal));
 					row.list.set(headerMap.get("hintRequestedTutor"), Integer.toString(hintRequestedTutor));
 					row.list.set(headerMap.get("hintForcedTutor"), Integer.toString(hintForcedTutor));
+					row.list.set(headerMap.get("hintFollowCurr"), Integer.toString(hintFollowCurr));
+					row.list.set(headerMap.get("hintFollowTotal"), Integer.toString(hintFollowTotal));
+					row.list.set(headerMap.get("hintRequestedFollowCurr"), Integer.toString(hintRequestedFollowCurr));
+					row.list.set(headerMap.get("hintRequestedFollowTotal"), Integer.toString(hintRequestedFollowTotal));
+					row.list.set(headerMap.get("hintForcedFollowCurr"), Integer.toString(hintForcedFollowCurr));
+					row.list.set(headerMap.get("hintForcedFollowTotal"), Integer.toString(hintForcedFollowTotal));
+					row.list.set(headerMap.get("hintFollowTutor"), Integer.toString(hintFollowTutor));
+					row.list.set(headerMap.get("hintRequestedFollowTutor"), Integer.toString(hintRequestedFollowTutor));
+					row.list.set(headerMap.get("hintForcedFollowTutor"), Integer.toString(hintForcedFollowTutor));					
+					
+					row.list.set(headerMap.get("hintFollowRateCurr"), Double.toString((double)hintFollowCurr / (hintRequestedCurr + hintForcedCurr)));
+					row.list.set(headerMap.get("hintFollowRateTotal"), Double.toString((double)hintFollowTotal / (hintRequestedTotal + hintForcedTotal)));
+					row.list.set(headerMap.get("hintFollowRateTutor"), Double.toString((double)hintFollowTutor / (hintRequestedTutor + hintForcedTutor)));
+					row.list.set(headerMap.get("hintForcedFollowRateCurr"), Double.toString((double)hintForcedFollowCurr / hintForcedCurr));
+					row.list.set(headerMap.get("hintForcedFollowRateTotal"), Double.toString((double)hintForcedFollowTotal / hintForcedTotal));
+					row.list.set(headerMap.get("hintForcedFollowRateTutor"), Double.toString((double)hintForcedFollowTutor / hintForcedTutor));
+					row.list.set(headerMap.get("hintRequestedFollowRateCurr"), Double.toString((double)hintRequestedFollowCurr / hintRequestedCurr));
+					row.list.set(headerMap.get("hintRequestedFollowRateTotal"), Double.toString((double)hintRequestedFollowTotal / hintRequestedTotal));
+					row.list.set(headerMap.get("hintRequestedFollowRateTutor"), Double.toString((double)hintRequestedFollowTutor / hintRequestedTutor));
+					
 					
 					// numActionCurr and numActionTotal
 					for (int j = 0; j < numActionCurr.length; j++) {
@@ -370,7 +424,6 @@ public class FeatureGenerator {
 						printer.printRecord(obj);
 					}
 				}
-				
 			}
 		}
 		printer.close();
@@ -405,11 +458,11 @@ public class FeatureGenerator {
 	public static void main(String[] args) {
 		try {
 			System.out.println("Spliting Record...");
-			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "Cond5_Ready.csv");
+			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "Cond6_Ready.csv");
 			System.out.println();
-						
+			
 			System.out.println("Updating hintFollow...");
-			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "Cond5_Tag.csv");
+			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "Cond6_Tag.csv");
 			System.out.println();
 
 			System.out.println("Calculating Features...");
@@ -417,13 +470,13 @@ public class FeatureGenerator {
 			System.out.println();
 
 			System.out.println("Outputing records into one file...");
-			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/Cond5_Filled.csv");
+			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/Cond6_Filled.csv");
 			System.out.println();
 			
 			// refactor to only output columns after currPrb
-//			System.out.println("Outputing hint follow records into one file...");
-//			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "DT6_Cond6_HintFollow.csv");
-//			System.out.println();
+			System.out.println("Outputing hint follow records into one file...");
+			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "Cond6_HintFollow.csv");
+			System.out.println();
 			
 			
 			System.out.println("Completed!");

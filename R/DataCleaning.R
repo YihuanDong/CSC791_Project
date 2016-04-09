@@ -10,7 +10,6 @@ dataCleansing<-function(data){
   data$selfExplain <- NULL
   data$message <- NULL
   data$dateTime <- NULL
-  data$problemType <- NULL
   
   
   data$RLpolicy <- NULL
@@ -79,6 +78,7 @@ dataCleansing<-function(data){
   #remove change direct/indirection proof; remove end; remove rule with #NAME? or login
   #data<-data[data$action != 8,]
   #data<-data[data$action != 98,]
+  
   data<-data[data$rule != "login",]
   data<-data[data$rule != "#NAME?",]
   data<-data[!(data$preState=="" | data$postState=="undefined"),]
@@ -96,12 +96,12 @@ dataCleansing<-function(data){
 }
 
 #load data
-inputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond5\\Cond5_Original.csv"
+inputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond6\\Cond6_Original.csv"
 data <- read.csv(inputFilePath)
 
 #clean data
 data<-dataCleansing(data)
 
 #write data
-outputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond5\\Cond5_Clean.csv"
+outputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond6\\Cond6_Clean.csv"
 write.csv(data,file = outputFilePath)
