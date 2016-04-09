@@ -113,7 +113,8 @@ public class FeatureGenerator {
 			* DECLARE: features for a single student here.
 			***********************************************/
 			int numProblemsCompleted = 0;
-		
+			int hintRequestedTutor = 0;
+			int hintForcedTutor = 0;
 			
 			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
 			for (String key1: recordsByProblem.keySet()) {
@@ -125,6 +126,11 @@ public class FeatureGenerator {
 				int numInteractionCurr = 0; 
 				int numInteractionTotal = 0;
 				int numAttempts = 1;
+				int hintRequestedCurr = 0;
+				int hintRequestedTotal = 0;
+				int hintForcedCurr = 0;
+				int hintForcedTotal = 0;
+				
 				int[] numActionCurr = new int[10];
 				int[] numActionTotal = new int[10];
 				Map<String,Integer> numCorrectRuleCurr = new HashMap<String,Integer>();
@@ -163,6 +169,8 @@ public class FeatureGenerator {
 						numInteractionCurr = 0;
 						numAttempts++;
 						stepTime = currElTime;
+						hintRequestedCurr = 0;
+						hintForcedCurr = 0;
 						
 						//numActionCurr
 						for (int j = 0; j < numActionCurr.length; j++) numActionCurr[j] = 0;
@@ -187,7 +195,7 @@ public class FeatureGenerator {
 					if (action >= 1 && action <= 10) numActionCurr[action-1]++;
 					
 					//isForced
-					if (!row.list.get(headerMap.get("action")).equals("7")) isForced = 1;
+					if (action == 7) isForced = 1;
 					
 					//hasCollaborator
 					if (!row.list.get(headerMap.get("collaborators")).equals("")) hasCollaborator = 1;
@@ -202,6 +210,12 @@ public class FeatureGenerator {
 					if (isRule) {
 						if ((action == 3 || action == 5) && error != 0) numWrongRuleCurr.put(rule, numWrongRuleCurr.get(rule)+1);
 					}
+					
+					// hintRequestedCurr
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action == 7) hintRequestedCurr++;
+					
+					// hintForcedCurr
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedCurr++;
 					
 					/********************************
 					 * Calculate Total feature here
@@ -223,11 +237,23 @@ public class FeatureGenerator {
 						if ((action == 3 || action == 5) && error != 0) numWrongRuleTotal.put(rule, numWrongRuleTotal.get(rule)+1);
 					}
 					
+					// hintRequestedTotal
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action == 7) hintRequestedTotal++;
+					
+					// hintForcedTotal
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedTotal++;
+					
 					/*******************************
 					 * Calculate Tutor feature here
 					 *******************************/
 					//numProblemsCompleted
 					if (row.list.get(headerMap.get("action")).equals("98")) numProblemsCompleted++;
+					
+					// hintRequestedTutor
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action == 7) hintRequestedTutor++;
+					
+					// hintForcedTutor
+					if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedTutor++;
 					
 					
 					/****************************
@@ -242,6 +268,12 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("hasCollaborator"), Integer.toString(hasCollaborator));
 					row.list.set(headerMap.get("PPLevel"), getPPLevel(currPrb));
 					row.list.set(headerMap.get("elTimeTotal"), Double.toString(elTimeTotal));
+					row.list.set(headerMap.get("hintRequestedCurr"), Integer.toString(hintRequestedCurr));
+					row.list.set(headerMap.get("hintRequestedTotal"), Integer.toString(hintRequestedTotal));
+					row.list.set(headerMap.get("hintForcedCurr"), Integer.toString(hintForcedCurr));
+					row.list.set(headerMap.get("hintForcedTotal"), Integer.toString(hintForcedTotal));
+					row.list.set(headerMap.get("hintRequestedTutor"), Integer.toString(hintRequestedTutor));
+					row.list.set(headerMap.get("hintForcedTutor"), Integer.toString(hintForcedTutor));
 					
 					// numActionCurr and numActionTotal
 					for (int j = 0; j < numActionCurr.length; j++) {
@@ -290,12 +322,15 @@ public class FeatureGenerator {
 				List<Row> recordsForCurrPrb = recordsByProblem.get(key1);
 				for (int i = 0; i < recordsForCurrPrb.size(); i++) {
 					Row row = recordsForCurrPrb.get(i);
-					if (!row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")) continue;
+					int hintFollow = -1;
+					if (!row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive")) {
+						row.list.set(headerMap.get("hintFollow"), Integer.toString(hintFollow));
+						continue;
+					}
 					
 					String studentID = row.list.get(headerMap.get("studentID"));
 					String currPrb = row.list.get(headerMap.get("currPrb"));
 					String elTime = row.list.get(headerMap.get("elTime"));
-					int hintFollow = -1;
 					
 					for (int j = 0; j < statsRecords.size(); j++) {
 						Row hintRow = statsRecords.get(j);
@@ -372,16 +407,15 @@ public class FeatureGenerator {
 			System.out.println("Spliting Record...");
 			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "Cond5_Ready.csv");
 			System.out.println();
-			
+						
+			System.out.println("Updating hintFollow...");
+			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "Cond5_Tag.csv");
+			System.out.println();
+
 			System.out.println("Calculating Features...");
 			FeatureGenerator.CalculateFeatures();
 			System.out.println();
-			
-			// refactor to only do search if is a hint.
-//			System.out.println("Updating hintFollow...");
-//			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "DT6_Cond6_Stat.csv");
-//			System.out.println();
-			
+
 			System.out.println("Outputing records into one file...");
 			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/Cond5_Filled.csv");
 			System.out.println();
