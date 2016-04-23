@@ -118,6 +118,8 @@ public class FeatureGenerator {
 			int hintFollowTutor = 0;
 			int hintRequestedFollowTutor = 0;
 			int hintForcedFollowTutor = 0;
+			int numCorrectRuleAppTutor = 0;
+			int numRuleAppTutor = 0;
 			
 			Map<String, List<Row>> recordsByProblem = recordsByStudent.get(key);
 			for (String key1: recordsByProblem.keySet()) {
@@ -139,7 +141,11 @@ public class FeatureGenerator {
 				int hintRequestedFollowTotal = 0;
 				int hintForcedFollowCurr = 0;
 				int hintForcedFollowTotal = 0;
-				
+				int numCorrectRuleAppCurr = 0; // total number of all correct Rule Application
+				int numCorrectRuleAppTotal = 0;
+				int numRuleAppCurr = 0;
+				int numRuleAppTotal = 0;
+				double elTimeTutor = 0;
 				
 				
 				int[] numActionCurr = new int[10];
@@ -184,6 +190,9 @@ public class FeatureGenerator {
 						hintFollowCurr = 0;
 						hintRequestedFollowCurr = 0;
 						hintForcedFollowCurr = 0;
+						numCorrectRuleAppCurr = 0;
+						numRuleAppCurr = 0;
+						
 						
 						//numActionCurr
 						for (int j = 0; j < numActionCurr.length; j++) numActionCurr[j] = 0;
@@ -215,8 +224,15 @@ public class FeatureGenerator {
 					
 					//numCorrectRuleCurr
 					if (isRule) {
-						if (action == 3 && error == 0) numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)+1);
-						if (action == 5 && error != 0) numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)-1);
+						if (action == 3 && error == 0) {
+							numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)+1);
+							numRuleAppCurr++;
+							numCorrectRuleAppCurr++;
+						}
+						if (action == 5 && error != 0) {
+							numCorrectRuleCurr.put(rule, numCorrectRuleCurr.get(rule)-1);
+							numCorrectRuleAppCurr--;
+						}
 					}
 					
 					//numWrongRuleCurr
@@ -248,8 +264,15 @@ public class FeatureGenerator {
 					
 					//numCorrectRuleTotal
 					if (isRule) {
-						if (action == 3 && error == 0) numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)+1);
-						if (action == 5 && error != 0) numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)-1);
+						if (action == 3 && error == 0) {
+							numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)+1);
+							numRuleAppTotal++;
+							numCorrectRuleAppTotal++;
+						}
+						if (action == 5 && error != 0) {
+							numCorrectRuleTotal.put(rule, numCorrectRuleTotal.get(rule)-1);
+							numCorrectRuleAppTotal--;
+						}
 					}
 					
 					//numWrongRuleTotal
@@ -273,6 +296,8 @@ public class FeatureGenerator {
 					/*******************************
 					 * Calculate Tutor feature here
 					 *******************************/
+					elTimeTutor += stepTime;
+					
 					//numProblemsCompleted
 					if (row.list.get(headerMap.get("action")).equals("98")) numProblemsCompleted++;
 					
@@ -289,7 +314,15 @@ public class FeatureGenerator {
 						if (row.list.get(headerMap.get("hintGiven")).startsWith("Try to derive") && action != 7) hintForcedFollowTutor++;
 					}
 					
-					
+					if (isRule) {
+						if (action == 3 && error == 0) {
+							numRuleAppTutor++;
+							numCorrectRuleAppTutor++;
+						}
+						if (action == 5 && error != 0) {
+							numCorrectRuleAppTutor--;
+						}
+					}
 					/****************************
 					 * Update feature value here
 					 ****************************/
@@ -298,9 +331,11 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("numProblemsCompleted"), Integer.toString(numProblemsCompleted));
 					row.list.set(headerMap.get("numAttempts"), Integer.toString(numAttempts));
 					row.list.set(headerMap.get("stepTime"), Double.toString(stepTime));
+					row.list.set(headerMap.get("elTimeTutor"), Double.toString(elTimeTutor));
 					row.list.set(headerMap.get("isForced"), Integer.toString(isForced));
 					row.list.set(headerMap.get("hasCollaborator"), Integer.toString(hasCollaborator));
 					row.list.set(headerMap.get("PPLevel"), getPPLevel(currPrb));
+					row.list.set(headerMap.get("currLvl"), getLevel(currPrb));
 					row.list.set(headerMap.get("elTimeTotal"), Double.toString(elTimeTotal));
 					row.list.set(headerMap.get("hintRequestedCurr"), Integer.toString(hintRequestedCurr));
 					row.list.set(headerMap.get("hintRequestedTotal"), Integer.toString(hintRequestedTotal));
@@ -316,7 +351,14 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("hintForcedFollowTotal"), Integer.toString(hintForcedFollowTotal));
 					row.list.set(headerMap.get("hintFollowTutor"), Integer.toString(hintFollowTutor));
 					row.list.set(headerMap.get("hintRequestedFollowTutor"), Integer.toString(hintRequestedFollowTutor));
-					row.list.set(headerMap.get("hintForcedFollowTutor"), Integer.toString(hintForcedFollowTutor));					
+					row.list.set(headerMap.get("hintForcedFollowTutor"), Integer.toString(hintForcedFollowTutor));	
+					
+					row.list.set(headerMap.get("numCorrectRuleAppCurr"), Integer.toString(numCorrectRuleAppCurr));					
+					row.list.set(headerMap.get("numCorrectRuleAppTotal"), Integer.toString(numCorrectRuleAppTotal));					
+					row.list.set(headerMap.get("numCorrectRuleAppTutor"), Integer.toString(numCorrectRuleAppTutor));					
+					row.list.set(headerMap.get("numRuleAppTotal"), Integer.toString(numRuleAppTotal));					
+					row.list.set(headerMap.get("numRuleAppTutor"), Integer.toString(numRuleAppTutor));					
+					row.list.set(headerMap.get("numRuleAppCurr"), Integer.toString(numRuleAppCurr));							
 					
 					row.list.set(headerMap.get("hintFollowRateCurr"), Double.toString((double)hintFollowCurr / (hintRequestedCurr + hintForcedCurr)));
 					row.list.set(headerMap.get("hintFollowRateTotal"), Double.toString((double)hintFollowTotal / (hintRequestedTotal + hintForcedTotal)));
@@ -327,6 +369,10 @@ public class FeatureGenerator {
 					row.list.set(headerMap.get("hintRequestedFollowRateCurr"), Double.toString((double)hintRequestedFollowCurr / hintRequestedCurr));
 					row.list.set(headerMap.get("hintRequestedFollowRateTotal"), Double.toString((double)hintRequestedFollowTotal / hintRequestedTotal));
 					row.list.set(headerMap.get("hintRequestedFollowRateTutor"), Double.toString((double)hintRequestedFollowTutor / hintRequestedTutor));
+					
+					row.list.set(headerMap.get("numCorrectRuleAppRateCurr"), Double.toString((double)numCorrectRuleAppCurr / numRuleAppCurr));
+					row.list.set(headerMap.get("numCorrectRuleAppRateTotal"), Double.toString((double)numCorrectRuleAppTotal / numRuleAppTotal));
+					row.list.set(headerMap.get("numCorrectRuleAppRateTutor"), Double.toString((double)numCorrectRuleAppTutor / numRuleAppTutor));
 					
 					
 					// numActionCurr and numActionTotal
@@ -451,6 +497,9 @@ public class FeatureGenerator {
 		return currPrb.replaceAll("\\d\\.(\\d|-\\d)\\.\\d\\.\\d", "$1");
 	}
 	
+	private static String getLevel(String currPrb) {
+		return currPrb.replaceAll("(\\d|-\\d)\\.(\\d|-\\d)\\.\\d\\.\\d", "$1");
+	}
 	
 	/*****************
 	 * Main Function
