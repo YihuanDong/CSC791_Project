@@ -1,11 +1,15 @@
 FCBF <- function(data,threshold=0.5){
   #input: Data Frame, make sure the last column is 
   #the attribute needed to be predict
+<<<<<<< HEAD
   #hintfollow is 57
+=======
+>>>>>>> 05544eae219f128144458efadc500748d918faaf
   N = length(data) - 1
   potential = c()
   corValue = c()
   for(i in 1:N){
+<<<<<<< HEAD
     #check whether this column's std is zero
     if(sd(data[[i]],na.rm = TRUE) == 0)next;
     #use mean value to replace NA value
@@ -14,6 +18,10 @@ FCBF <- function(data,threshold=0.5){
     
     #calculate correlation between current feature and class label
     correlation = abs(cor(data[[i]],data[[N+1]],use = "complete.obs"))
+=======
+    #calculate correlation between current feature and class label
+    correlation = abs(cor(data[[i]],data[[N+1]]))
+>>>>>>> 05544eae219f128144458efadc500748d918faaf
     if(correlation >= threshold){
       potential = c(potential,i)
       corValue = c(corValue,correlation)
@@ -38,7 +46,11 @@ FCBF <- function(data,threshold=0.5){
       repeat{
         Fqn = Fq;
         indexFqn = indexFq
+<<<<<<< HEAD
         if(abs(cor(data[[Fp]],data[[Fq]],use = "complete.obs"))>=abs(cor(data[[Fq]],data[[N+1]],use = "complete.obs"))){
+=======
+        if(abs(cor(data[[Fp]],data[[Fq]]))>=abs(cor(data[[Fq]],data[[N+1]]))){
+>>>>>>> 05544eae219f128144458efadc500748d918faaf
           #remove Fq from potential list
           potential = setdiff(potential,Fq)
           
@@ -66,6 +78,11 @@ FCBF <- function(data,threshold=0.5){
   
   goodFeatures = potential
   print(goodFeatures)
+<<<<<<< HEAD
   #attributes(data)$names[goodFeatures]
   return(goodFeatures)
 }
+=======
+  return(goodFeatures)
+}
+>>>>>>> 05544eae219f128144458efadc500748d918faaf

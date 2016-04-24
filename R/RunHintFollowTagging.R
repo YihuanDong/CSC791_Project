@@ -1,13 +1,13 @@
 #load data
-inputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\DT6_Cond6\\DT6_Cond6_ActionTable_old.csv"
+inputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond6\\Cond6_Ready.csv"
 data <- read.csv(inputFilePath)
 
 #data cleaning
-data <- dataCleansing(data)
+#data <- dataCleansing(data)
 
 #output generation
 output <- generateOutputData(data)
 
 #write data
-outputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\DT6_Cond6\\DT6_Cond6_Stat.csv"
+outputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond6\\Cond6_Tag.csv"
 write.csv(output,file = outputFilePath)
