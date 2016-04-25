@@ -230,3 +230,15 @@ regexEscapeChar<-function(regex){
   regex<-gsub("\\[","\\\\[", regex)
   return (regex)
 }
+
+#load data
+inputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond6\\Cond6_Filled.csv"
+data <- read.csv(inputFilePath)
+
+#clean data
+data<-dataCleansing(data)
+outData <- generateOutputData(data)
+
+#write data
+outputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond6\\Cond6_HintTag.csv"
+write.csv(outData,file = outputFilePath)

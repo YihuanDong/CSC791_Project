@@ -14,7 +14,7 @@ import org.apache.commons.csv.CSVRecord;
 
 
 public class FeatureGenerator {
-	public static final String DATA_DIR = "../../data/Cond6/";
+	public static final String DATA_DIR = "../../data/Cond5/";
 	
 	// Save the header into csv, for getting the column number with header name
 	private static Map<String,Integer> headerMap;
@@ -438,6 +438,13 @@ public class FeatureGenerator {
 						if (studentID.equals(hintRow.list.get(header.get("studentID")))
 								&& currPrb.equals(hintRow.list.get(header.get("currPrb")))
 								&& elTime.equals(hintRow.list.get(header.get("elTime")))) {
+							row.list.set(headerMap.get("stateChangedB4FollowHint"),hintRow.list.get(header.get("stateChangedB4FollowHint")));
+							row.list.set(headerMap.get("lvl1_timeCost"),hintRow.list.get(header.get("lvl1_timeCost")));
+							row.list.set(headerMap.get("diffRulesApplied"),hintRow.list.get(header.get("diffRulesApplied")));
+							row.list.set(headerMap.get("diffNodesHighlighted"),hintRow.list.get(header.get("diffNodesHighlighted")));
+							row.list.set(headerMap.get("nodesDerived"),hintRow.list.get(header.get("nodesDerived")));
+							row.list.set(headerMap.get("numRestart"),hintRow.list.get(header.get("numRestart")));
+							row.list.set(headerMap.get("numDiffNodeInResult"),hintRow.list.get(header.get("numDiffNodeInResult")));
 							if (Boolean.parseBoolean(hintRow.list.get(header.get("lvl1HintFollowed"))))
 								hintFollow = 1;
 							else
@@ -507,11 +514,11 @@ public class FeatureGenerator {
 	public static void main(String[] args) {
 		try {
 			System.out.println("Spliting Record...");
-			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "Cond6_Ready.csv");
+			FeatureGenerator.splitRecord(FeatureGenerator.DATA_DIR + "Cond5_Ready.csv");
 			System.out.println();
 			
 			System.out.println("Updating hintFollow...");
-			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "Cond6_Tag.csv");
+			FeatureGenerator.updateHintFollow(FeatureGenerator.DATA_DIR + "Cond5_Tag.csv");
 			System.out.println();
 
 			System.out.println("Calculating Features...");
@@ -519,12 +526,12 @@ public class FeatureGenerator {
 			System.out.println();
 
 			System.out.println("Outputing records into one file...");
-			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "/Cond6_Filled.csv");
+			FeatureGenerator.outputRecords(FeatureGenerator.DATA_DIR + "Cond5_Filled.csv");
 			System.out.println();
 			
 			// refactor to only output columns after currPrb
 			System.out.println("Outputing hint follow records into one file...");
-			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "Cond6_HintFollow.csv");
+			FeatureGenerator.outputHintFollowRecords(FeatureGenerator.DATA_DIR + "Cond5_HintFollow.csv");
 			System.out.println();
 			
 			

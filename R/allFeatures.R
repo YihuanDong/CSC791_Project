@@ -166,3 +166,17 @@ regexEscapeChar<-function(regex){
   return (regex)
 }
 
+
+#load data
+inputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond5\\Cond5_HintFollow.csv"
+inputFilePath2 <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond5\\Cond5_Clean.csv"
+data <- read.csv(inputFilePath)
+data2 <- read.csv(inputFilePath2)
+
+#clean data
+data<-dataCleansing(data)
+newdata <- hsFeatures(data,data2)
+
+#write data
+outputFilePath <- "E:\\Courses\\CSC 791 Data Analysis for User Adaptive Systems\\CSC791_Project\\Data\\Cond5\\Cond5_AllFeature.csv"
+write.csv(newdata,file = outputFilePath)
