@@ -1,7 +1,6 @@
 FCBF <- function(data,threshold=0.5){
   #input: Data Frame, make sure the last column is 
   #the attribute needed to be predict
-  #hintfollow is 57
   N = length(data) - 1
   potential = c()
   corValue = c()
@@ -14,6 +13,7 @@ FCBF <- function(data,threshold=0.5){
     
     #calculate correlation between current feature and class label
     correlation = abs(cor(data[[i]],data[[N+1]],use = "complete.obs"))
+    
     if(correlation >= threshold){
       potential = c(potential,i)
       corValue = c(corValue,correlation)
@@ -66,6 +66,7 @@ FCBF <- function(data,threshold=0.5){
   
   goodFeatures = potential
   print(goodFeatures)
+  
   #attributes(data)$names[goodFeatures]
   return(goodFeatures)
 }
